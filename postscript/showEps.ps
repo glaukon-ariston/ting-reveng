@@ -1,0 +1,116 @@
+%!PS-Adobe-3.0
+%%Title: drawCalculator.ps
+%%BoundingBox: 0 0 597 842
+%%DocumentPaperSizes: a4
+%%DocumentMedia: a4 595 842 0 () ()
+%%Orientation: Portrait
+%%DocumentNeededResources: procset net.anastigmatix.Import 0.1 13
+%%+ procset net.anastigmatix.PNG 0.1 7
+%%Creator: Glaukon Ariston
+%%Copyright: Glaukon Ariston. All Rights Reserved
+%%Date: 10/05/2016
+%%LanguageLevel: 3
+%%EndComments
+
+
+/debug true def
+
+%%BeginProlog
+
+(Resource/ProcSet/net.anastigmatix.MetaPre) run
+(Resource/ProcSet/net.anastigmatix.StreamIO) run
+(Resource/ProcSet/net.anastigmatix.BinaryIO) run
+(Resource/Category/net.anastigmatix.filter) run
+%(Resource/net.anastigmatix.filter/FlateDecode) run
+%(Resource/net.anastigmatix.filter/DSCDecode) run
+%(Resource/net.anastigmatix.filter/DSCDataEncode) run
+%(Resource/net.anastigmatix.filter/InUPathDecode) run
+%(Resource/net.anastigmatix.filter/WSMarkEncode) run
+(Resource/ProcSet/net.anastigmatix.Import) run
+(Resource/ProcSet/net.anastigmatix.PNG) run
+
+(include/misc.ps) run
+
+%%EndProlog
+
+
+
+%%BeginSetup
+
+/net.anastigmatix.Import /ProcSet findresource begin
+/net.anastigmatix.PNG    /ProcSet findresource begin
+userdict begin
+misc begin
+
+/PageSize [
+	210 mm %width
+	297 mm %height
+] def
+
+%%EndSetup
+
+
+%%BeginScript
+
+
+/epsBoundingBox {<<>>begin % filePath -> [x y width height]
+	(r) file
+	{
+		dup 1024 string readline
+		not {
+			exit
+		} if
+		(%%BoundingBox: ) search
+		{
+			% post match pre
+			() eq {
+				pop
+				/post exch def
+				[([) post (])] sconcat cvx exec
+				exch
+				exit
+			} {
+				pop pop				
+			} ifelse
+		} {
+			pop
+		} ifelse
+	} loop
+	closefile
+end} def
+
+
+/epsShow {<<>>begin % filePath [x y] patch@[width height] -> _
+	[/filePath /xy /patch] #=
+	save
+		filePath epsBoundingBox [/bbox] #=
+
+		debug {
+			gsave
+			0 setgray
+			bbox == 
+			bbox #_ rectstroke
+			grestore
+		} if
+
+		xy #_ translate
+		patch #x bbox #width div dup scale
+		/showpage {} bind def
+		filePath run % run EPS
+	restore
+end} def
+
+
+% Main
+{
+	(../apps/calculator/print/lovre_cmy-k.eps) [100 200] [40 mm 40 mm] epsShow
+
+	showpage
+} exec
+
+
+end % misc
+%%EndScript
+
+%%Trailer
+%%EOF

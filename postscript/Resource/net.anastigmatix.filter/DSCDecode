@@ -1,0 +1,102 @@
+%!PS-Adobe-3.0 Resource-net.anastigmatix.filter
+%%Title: DSCDecode - filter for reading PostScript with DSC
+%%DocumentNeededResources: Category net.anastigmatix.filter 0.1 2
+%%DocumentSuppliedResources: net.anastigmatix.filter DSCDecode 0.1 12
+%%Version: 0.1 12
+%%For: Chapman Flack - www.anastigmatix.net
+%%Creator: makeDSCDecode 1.12 using AFPL Ghostscript 851
+%%CreationDate: 2009-12-04 20:29:09
+%%LanguageLevel: 3
+%%VMlocation: global
+%%VMusage: 7310 28
+%%EndComments
+%%BeginProlog
+%%IncludeResource: Category net.anastigmatix.filter 0.1 2
+%%BeginResource: net.anastigmatix.filter DSCDecode 0.1 12 7310 28
+% VMusage measured in Adobe PostScript(r) 3010.108 on a Phaser 750 (PowerPC)
+% Usage after vmreclaim: 5313
+
+% Copyright Chapman Flack, www.anastigmatix.net. May be freely used and
+% distributed without modification provided this notice remains intact.
+% Provided in the hope that it will be useful but AS-IS WITHOUT ANY EXPRESS
+% OR IMPLIED WARRANTY AND WITHOUT REPRESENTATION AS TO ITS SUITABILITY FOR
+% ANY PURPOSE.  
+
+%%BeginData:         73 ASCII Lines
+currentfile /ASCII85Decode filter cvx exec
+018`+6tKkHA7[E3A  TTP5DIIU   .BkM9kFD5tPAnc('ATAo6ATMd4Ear[%FCB96F*j'mL]W`
+O       H]fJ6       7t$P       "I?IQc+HeUF%:aO$Eb0-1E+*6lBl7RC!HVgoE+*6lBl
+7 RHf8T  foh_ .>pNW  BT  0ART+  fDJXT]1G;EkNWBK-ART+fDJXT]1G;['NWC8CART+fD
+J XT]1G;  9uN WBH,A  RT +fDJXT  ]1G:eL!BP74@:X:oCjD1"02*mV"!o6DEb/ZiDf0B:O
+u "aDF)Z  /2H ]gR>P)Xg  E#)E>DLQZeCFcpm'!KpQJ@Yb&J!Jgc>=H[-L!KpQJWKKr2",Hu
+@ LOFN*"  Gm)    @LQZe  .P#[JBI=%,@P')qII?ITYOq*X20.q<bBQS<,@<,jkH]g?A02k]
+1 N@uqU<% fmWF)     Z/  2P!=AX%[&V$/otuFF?4JS@<,jkH]g?A0.q<bBQS<,@<,jkP!:T
+Q 3\N-=F  )Z/2P!=A   X  %[&V$/otuFF?3oPChA$W30H6S0.q<bBQQ:VARTUhBTbS502+hg
+0 .q<bEb  1C  u0/#[j 0  /"r!E,o NQ5CJ\)Ou"aD6rQHoE,961H]g?A0.q<bBQQ:FEbo?N
+5 C8PW0/  #A  L4aW?$ L]  NY>L]  `J5P)#2aL]ET%P"^:NP!5%OP!4[&P$!lVL]NZ@P%'4
+J P$!mH  P"_$  &I?I  TY  H]iN3 !0TNoP#Zpn%[&V$/oY9.HQ[9:As,-0"-Q<5!g4FW!Km
+J       >"-Pj       2G`l       s#!g3S?",Qu?LQZn1Oq*X2AmoLsAKZ&*FDtYuCM@[!0
+.q3QEdJpJ@V1DuP   "UT2P#-L   E@V1c_L]`f5L]N[<L]W_WL]`f(P'E.-L]W_?P"Uc8I=$$
+UA!21eP#Zpn%[&ViEckq9F(KH4@:O(eDJ(UTE+3WqHS8lIF`);;ArQhS1G:C6E+3jN5C8PQL^K
+;^0/"qs@UXU+@Wc:G5%AMIP!5%R04Sp:+Cf>+L]NY>Ou&7bP')pOP'(5VAr$FsDetS1P!4['Or
+9ElL]NZ@P%'4JP$!mHP"_$&I?ITYP#Qjm%[&V$/oY8MH]8#B@<--:0.q3QEfrY6OuS7DP!+.F0
+.q3QEfrY6OuS7DP!+.F0.q3QEfrY6OuS7JP!+/TFcpm1Fcpm1Fc?E=@<-.3P#Qjm<.0p/I?IQX
+P#Qjm       <0A1R0.q3Q@?Q8+Fa]D_Ou"aDFE288H]gRK! /LZ==HYY,@Zi^,!g60&L]Wa=L
+]W`5H [V&KI  =$bNP!+/J!0U!'H]iN-!.C#1L]ET%I?ITn3 /A$,4aW?7P')T\I=$bWP&5Q/F
+bg$GH \`,o4a  W"aI=$eMI?ITYP#Zpn<JU^>=H[-V!Kp->5 (/S(Ou"aDA8H<sH]g@O@ZmRN)
+1@YXO u"aDB4  5:s     +C]J     *L]     Cq'C      m%J     ?Oq*X20.pmRDf'hS0
+.pdOF (:@tL]  `G6 P(t  \D/ nAd  >A !0'  >4  teQ  AA8 H<s  P!:U.@q1[4>DNE<!
+g8<l@ :Ne#0.p mG  A!/W $7  8H=2 !  0T-b 04  Sp:L ]E  SoEb &UA30!uKDfor>ChA
+iL0/" qs@VfY  ><        0 DBeFY>C  #A8H  < sP!>* hN        W:^c/p),OCm%#GF
+cnpA0 .q3Q/!  <,        [ E-ma5I? IQXP%  @ p^4tf ?#        7#_511G<0HA!0$=
+1Pc$e !/L]>=  F6  3?Oo^_0  I?I0 X  !g6Z K@ Yb)K; MY  @:WKKH$!KpQJ!Jgi6!Kr4
+o"-RJ `!KoX  0f8' Nb!K r4  ZFC  ?  ;)@  q]  F`C  QdS <V34 $*V2,50s,r/#hhV>
+\L]NZ       @02?Y      +Cd     i5O      De*      FBf      mT$9H[CPNP$!l,0/
+$!LP/!/DP.ueTP$!l,L  ^K<XP!5  &DOuRl  <H[CPNP  $!l2P.u  eTP$!l2P/!/>I=6nVM
+#WWnH]gRU5CJ\dP')q1@r-()AS,XmAKYK!Df]K%Bl%@D5)9;ss,r.cOq*X20.pgXA:#su:IL0C
+Ou%&dAfu;-BOt[hHQZg:F`);;As.*d0.q3QChAi0I?IQNFCC>PP!+/TFcplqHS7$)FE288P!<n
+pAfu;-BOt[hH\_]c=H3BED0q'>P$!M?P"UrtL^K;^P!4[2P&6?bHS7$)E+1>\5;+ZBB5DL'P#Q
+jm<.0p/I?IQm5)9;ss,r.TATMr9F*(iR$^,Xm!.C#1I?G)'1G:@kF(9/34?SW5,pbutA4(9PD.
+RU,F)ki#A8     c@  %H$^ZIA9&f1ATMsL!KoU/">;D\ATVI0P')q1I?ITYOq*K\,pblhB5)6
+O@<>p=Eb/Z iDf0B:  H] iN7X*^!hP-6NQDKKH&ATDm<E+P2LH]iN7Fa\V"5*DsnOuP*]H$!V
+=P!+U%P#sA 2Bl7L'  P! +tKH]gRUFa\V"FcrePP!5%OI=!V6H$!V=I?ITYP#ZpW01'r+ATN9
+_<A.$[DIm      mP  4    aV     !ZD     Int3061KFFDku0DIntpOu%N5OuS6tP#-KYE
+b$hDA7C^4O u%  NL  <% i9#G @Gi  >A   TO"uOu%NL<IL$1I?IQXOq*K`,pblhB5)6ODe!
+p,ASuTNEb/ Zi  Df  0B :H]  iN7F Y@  WDF*&OBATMsL!KmJH1Ndn\+Dbb0AV^AM4`4hPF
+GKs\4d#r2" FD  eC  E, p#Z        !  Ko6eP#Qjm%ZUuE,t2]^6uQRXD.RU,Eb/ZiDf0B
+:HQ[3;F**3 =P  ,X  U( 05b        ?  BFHShN1Pc$oD0qFgP')2"0/"qhFC^P!Fa%eO06
+;)QF,^3`1O YE  cI  ?I TYO  q'Z>+ED  %%A8c@%H'0s:/n8R1H]g@O@Yb)K:j\?bL]ET2L
+aA3IH]g?A0 .o  Xk  6Z [3_B loM& L]  W_WL]rS9P(t\D/nB$5E/4OX=GR$A)3SBSP"Us&
+I=%-"P')q1 P'  )2  9<   JU      a5  rfW%SATMsL!Kq;HP')q1I=#aRA;C8L=H[&F0.p
+gXA:'J^P')29<IL$1I?IQX  P#Qj  m%[&V$/nJNHH]g@K!&#uXATVIG5CJ\)Ou"aDARfM&OuS
+V6L]W`O0/"qh@k`7m3/@Qt98FmWD(dOpARdE@OuS6uP"UrtL`qpnP!4\NP#.<^0/"qh@ka'FI?
+ITYP#Zpn%[&V$/n&7"HS7$)B45;55A>"FDf'H?055<6Df'HQ!0T,k@rH7,Bl8n2Ou$c^E\B'uA
+RfM=<.0+'Df0Z2DL4$HDf0Z2DN+XZ1OXUdBl7K)Eaa06Des-*AWfl:0/"qfBPWbqFa%dICh[cu
+L]NZ%DImm2L]ET$Op$pNHS98JF**3=Ou%NL<(0SNP&Pb]A9'=V/nJO.P#Qjm<.0p/I?ITYP#X/
+FDet40Ou%N    L%[&V[@;L!r +EM+9E+*6lBl7 Q:/okK    2H[?l(:IKPi!0TTqP#O(f/oY
+9?P!>+KHX  UD  oP!FGY<+9  u^+Cf>+L]W`A  P'AWi  De  pP+Det41Oo^_%OuS7)P!+/%
+Dfor>ChA# ICh[ cu+Dbb0    AV^AM!Ko6e    P#RT  e@:N  f15^e!8%?`l$05P??AKYf'
+ DInV  )  Oo^_ %04SpCDKK] ,N<#+t@:Nf15^ duhD  et..  s,p3*055<6Df'HQ!Ko6I@q
+  1Ze  I  ?IQX  P#Zpn<A.j #F`);;ArQhS1O YEtF)Z/@H] iM)F)Z/@N<#+tEb&U,P#Qjm
+  %[& Vi  Eckq  9F(KH4@:O (eDJ(UTEb&X++ EMR5+C]J*  +ECn7@X3',F+s\pP%K&s!-2
+L l@  X3  ',F-  94FP#RTnP ')pIP%%p>F`); ;As.+[O   uS6uP"L(W!KpQ@!0U!2$BdQ!
+L  ] N[<  I?IQ XP#Qjm<%ha "F`);;ArQhS1G <cWG@   Gi>ATO"uEaa0$H$!V=P!5&.OuS
+6  t P!+  .FEb $hDA7:X3Ou %NL<0B%cOq*X2 0.pdV E-mBAP"UrIHZEYFP,"1#H]k+OP#Q
+jm   %[&V $/o  >]@L]ESqEb /ZiDf0B:Ou"aD D00`  +L]im;Eb/ZiDf0B:Ou&9Y0.pdIB7
+#F  9Or9E     jH]h  $b5*C &:H]iN7Fa]EQI ?G)'        1G;-p6UYKqDe*F+OuP*nFC
+B96F,0m\)3S  BSP"UT2L]il7I=%-"P')q-I?ITd",Qu?LQXW[Y:jL%Ch7^6E+P2LH\_Z^!&%8
+n@Rb'JAOL*>De*FBfmT#_0/"qpFDt]F"-Qb>:j$hm@UWb^0/"qgAnR8kL]E56P"^Z7L]NZoL]N
+Z@B4GUd@r$l$P#u@,BOt[hOp$RDP#u@,BOt[hOp$s*L]W`A02#l%GAhM4F,0m\)3SBSP"UrtP-
+6NLBk)7,H#R>XD0nB-P!45U/s:4&P"@i$I?IQXH]iN7FY>C#D00<:P#XV,05GcBL]`J5P(t]3E
+asn/M#WWn06;5DL^/b9P(t].ATMsL!/LrE=>*E\F*'f]E-,bH0.pdIB9GJ4@rHL-FDPQK!Jh,H
+=>*$[F`):p7P?DIA7fJ;5;-\\EfC'T%?agH87c4?ATCRaCj@Ze/nAR,P!:UBGArNAL_#YN03)n
+6Ea`o?0.pdIB9GJ4E+3F8&r?RNLG*+ZAqg<eP,0gJBl7L<!&%i#Ckr'EEaa0$H$!V=L]B)K@<Z
+g3Ch[cuL]B)BDI[U%E/aiN@rH7,Bl8n101AZ)N;tVPA77,E/okK2061T40/"quA7@34A1oSgEb
+&T3@:Ne#0.p[C@kVnBEc[3?5!G,nP'&E2/nB$BP!4['OpR9Z019A]De*F-Oq*X2F(KH4@:O(eD
+J(Uj;aWra@rGmhOuSV805b?C/n&X+F*),/D..O#GV3TBCij6/+Co%qBl7L&ATMd4Ear[DFcn`~>
+
+% net.anastigmatix.Packager 0.1 12
+%%EndData
+%%EndResource
+%%EndProlog
+%%EOF

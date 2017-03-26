@@ -1,0 +1,387 @@
+%!PS-Adobe-3.0
+%%Title: tingOid.ps
+%%BoundingBox: 0 0 597 842
+%%Creator: Glaukon Ariston
+%%Copyright: Glaukon Ariston. All Rights Reserved
+%%Date: 16/12/2016
+%%LanguageLevel: 3
+%%EndComments
+
+%%BeginProlog
+
+% https://github.com/entropia/tip-toi-reveng/blob/master/docs/The_Code.pdf
+% https://github.com/entropia/tip-toi-reveng/blob/master/src/OidCode.hs
+% https://github.com/Martin-Dames/Tingeltangel/blob/master/src/main/java/tingeltangel/core/Codes.java
+
+
+/tingOid <<>> def
+tingOid begin
+
+
+
+/DEBUG false def
+/outlineRect { % x y w h lineWidth
+	DEBUG {
+		% draw an outline
+		gsave 
+			0.8 setgray	% debugGray
+			setlinewidth
+			rectstroke
+		grestore
+	} {
+		pop pop pop pop pop
+	} ifelse
+} def
+
+
+/dotOffsetMap [
+	[ 1 -1] % value 0
+	[-1 -1] % value 1
+	[-1  1] % value 2
+	[ 1  1] % value 3
+	[ 0  0] % Raster Point (4)
+	[ 1  0] % Raster Orientation (5)
+] def
+
+/RP 4 def	% Raster Point Offset
+/RO 5 def	% Raster Orientation Offset
+
+% Value
+/VP {<<>>begin % n i -> value
+	[/n /i ]#=
+	% (n >> 2*i) & 0x03
+	n i -2 mul bitshift
+		3 and
+end} def
+
+% Parity
+/VPP {<<>>begin % _ -> [xd yd]
+	% c1 = ((w1 ^ w4 ^ w6 ^ w7) & 0x01) << 1
+	VP1 [VP4 VP6 VP7] {xor} forall 1 and 1 bitshift
+	% c2 = (w0 ^ w2 ^ w3 ^ w5) & 0x01
+	VP0 [VP2 VP3 VP5] {xor} forall 1 and
+	% (c1 | c2)
+	or
+end} def
+
+
+/defVPs {<<>>begin % oid -> [int*16]
+	[/oid ]#==
+	0 1 7 {
+		dup 32 string cvs [ exch (VP) ] sconcat % VPi
+		cvn % /VPi
+		exch % /VPi i
+		oid exch % /VPi oid i
+		VP def
+	} for
+end} def
+
+
+/getOidPattern {<<>>begin % oid -> [int*16]
+	[/oid ]#=
+		
+	/VP0 oid 0 VP def
+	/VP1 oid 1 VP def
+	/VP2 oid 2 VP def
+	/VP3 oid 3 VP def
+	/VP4 oid 4 VP def
+	/VP6 oid 6 VP def
+	/VP5 oid 5 VP def
+	/VP7 oid 7 VP def
+
+	[VPP VP7 VP6 VP5 VP4 VP3 VP2 VP1 VP0] [/values ] #=
+
+	[	[RP RP  RP  RP]
+		[RP VPP VP7 VP6]
+		[RO VP5 VP4 VP3]
+		[RP VP2 VP1 VP0]
+	]
+end} def
+
+
+/getPatternOffsets {<<>>begin % [int*16] -> [[xd yd]*16]
+	[	exch
+		{	[ exch
+			{
+				dotOffsetMap exch get
+			} forall
+			]
+		} forall
+	]
+end} def
+
+
+/roundDot {<<>>begin % x y size -> _
+	% inherits: px
+	[/x /y /size ] #=
+	newpath
+		[ x y size 2 div] {px} forall
+			0 360 arc
+	fill
+end} def
+
+
+/squareDot {<<>>begin % x y size -> _
+	% inherits: px
+	[/x /y /size ] #=
+	[ [x y] {size 2 div sub} forall
+		size size] {px} forall
+	rectfill
+end} def
+
+
+/drawOidPattern {<<>>begin % x y oidPattern -> _
+	% inherits: dpi dotSize drawDot px pxPerPoint patternWidth patternHeight dotOffset dotOffset'
+	[/x /y /oidPattern ] #=
+	gsave 
+		0 setgray
+		/iy 3 def
+		oidPattern {
+			% [4*[xd yd]]
+			/ix 0 def
+			{	dup aload pop
+				[/xd /yd ] #=
+				[[ix iy] {pxPerPoint mul centreOffset add} forall] 
+				% [cx cy] % centre
+				{ 	% _d c_
+					exch 
+						xd 0 eq not yd 0 eq and {
+							dotOffset'
+						} {
+							dotOffset 
+						} ifelse 
+					mul 
+					add 
+				} a2forall
+				% x' y'
+				[ 3 1 roll ] [x y] {add} a2forall
+				dotSize drawDot
+			
+				/ix ix 1 add def
+			} forall
+			/iy iy 1 sub def
+		} forall
+	grestore
+	% debug
+	[x y patternWidth patternHeight 1] {px} forall outlineRect
+end} def
+
+
+/drawOidImage {<<>>begin % oid x y imageWidth imageHeight -> _
+	[/oid /x /y /imageWidth /imageHeight ] #=
+	oid getOidPattern getPatternOffsets [/oidPattern ]#=
+	gsave
+		x y translate
+		0 0 imageWidth pt2px imageHeight pt2px patternWidth patternHeight 
+			{ pop pop oidPattern drawOidPattern } tile
+		% debug
+		0 0 imageWidth imageHeight 1 px outlineRect
+	grestore
+end} def
+
+
+% convert from tingId to oid
+/tingId2Oid {% tingId -> oid
+	mapBaseTingid sub
+	mapTingidOid exch get cvi
+	dup -1 eq {
+		cvs [ exch
+			(ERROR: Unknown TingId )
+			exch
+		] sconcat print
+		stop
+	} if
+} def
+
+
+/printLabel {<<>>begin % label v -> _
+	[/label /v ]#=
+	[ label (: ) v toStr ( mm\n)] sconcat print
+end} def
+
+
+% dpi: 1200
+% dotSize: 1
+% pxPerPoint: 12
+% pxPerPoint: 0.254 mm
+% centreOffset: 6
+% patternWidth: 48
+% patternWidth: 1.016 mm
+% patternHeight: 48
+% patternHeight: 1.016 mm
+% dotOffset: 2
+% dotOffset': 3
+% startTingId: 15000
+% oidPatch: [28.3464565 28.3464565]
+% labelHeight: 11.338583
+% workArea: [538.582642 785.196899]
+/defineConstants { % dpi dotSize drawDot -> _
+	cvx dup toStr
+	[/dpi /dotSize /drawDot /drawDot'] #==
+	{1 dpi div inch mul} [/px ]#=
+	{px pt2mm} [/px2mm ]#=
+	{72 div dpi mul} [/pt2px ]#=
+	dpi 100 divUp [/pxPerPoint ]#==
+	(pxPerPoint) pxPerPoint px2mm printLabel
+	pxPerPoint 2 divUp [/centreOffset ]#==
+	4 pxPerPoint mul [/patternWidth ]#==
+	(patternWidth) patternWidth px2mm printLabel
+	4 pxPerPoint mul [/patternHeight ]#==
+	(patternHeight) patternHeight px2mm printLabel
+	dpi 600 divUp [/dotOffset ]#== % how many pixels to shift dots horizontally or vertically
+	dpi 400 divUp [/dotOffset']#== % how many pixels to shift raster orientation dot horizontally or vertically
+	% (labelHeight) labelHeight pt2mm printLabel
+	% (oidPatch) [oidPatch {pt2mm} forall] printLabel
+} def
+
+
+/Mid [00000 00007 00010 00011 00015 00018 00019 00020 00021 00022 00023 00024 00025 00027 00028 00029 00032 00033 00034 00035 00036 00037 00038 00039 00040 00041 00043 00044 00045 00047 00048 00049 00050 00051 05000 05001 05002 05003 05004 05005 05006 05007 05008 05009 05010 05011 05012 05013 05014 05015 05016 05017 05018 05019 05020 05021 05022 05024 05025 05026 05027 05028 05029 05030 05031 05032 05033 05034 05035 05036 05037 05038 05039 05040 05041 05042 05043 05044 05045 05046 05047 05048 05049 05050 05051 05052 05053 05054 05055 05056 05057 05060 05061 05062 05063 05064 05065 05066 05067 05068 05069 05070 05071 05072 05073 05074 05075 05076 05077 05078 05079 05080 05081 05082 05083 05084 05085 05086 05087 05088 05089 05090 05091 05092 05093 05094 05095 05096 05097 05098 05099 05100 05101 05102 05103 05104 05105 05106 05107 05108 05109 05110 05111 05112 05113 05114 05115 05116 05117 05118 05119 05120 05121 05122 05123 05124 05125 05126 05127 05128 05129 05130 05131 05132 05133 05134 05135 05136 05137 05138 05139 05140 05141 05146 05147 05148 05149 05150 05151 05152 05153 05154 05155 05156 05157 05158 05159 05160 05161 05162 05163 05164 05165 05166 05167 05168 05169 05170 05171 05172 05173 05174 05175 05176 05177 05178 05179 05180 05181 05182 05183 05184 05185 05186 05187 05188 05189 05190 05191 05192 05193 05194 05195 05196 05197 05198 05199 05200 05201 05202 05203 05204 05205 05206 05207 05208 05209 05212 05213 05217 05218 05219 05220 05221 05222 05223 05224 05229 05230 05231 05232 05233 05234 05235 05236 05237 05239 05240 05241 05242 05243 05244 05245 05246 05247 05248 05249 05250 05251 05252 05253 05254 05255 05256 05257 05258 05259 05260 05261 05262 05263 05264 05265 05266 05267 05268 05269 05270 05271 05272 05273 05274 05275 05276 05277 05278 05279 05280 05281 05282 05283 05284 05285 05286 05287 05288 05289 05290 05291 05292 05293 05294 05295 05296 05297 05298 05299 05308 05309 05310 05311 05312 05313 05314 05315 05316 05317 05318 05319 05320 05321 05322 05323 05326 05327 05328 05329 05330 05331 05332 05333 05334 05335 05336 05337 05338 05339 05340 05341 05342 05343 05344 05345 05346 05347 05348 05349 05350 05351 05352 05353 05354 05355 05356 05357 05358 05359 05360 05361 05362 05363 05364 05365 05366 05367 05368 05369 05370 05371 05372 05373 05374 05375 05376 05377 05378 05379 05380 05381 05382 05383 05384 05385 05386 05387 05388 05389 05390 05391 05392 05393 05394 05397 05398 05399 05400 05401 05402 05403 05404 05405 05406 05407 05500 05501 05502 05503 05504 05505 05506 05507 05508 05509 05510 05511 05512 05513 05514 05515 05516 05517 05518 05521 05522 05523 05524 05525 05526 05528 05530 05531 05532 05533 05534 05535 05536 05537 05538 05539 05540 05541 05542 05543 05544 05545 05546 05547 05548 05549 05550 05551 05552 05553 05555 05556 05557 05558 05560 05561 05562 05563 05564 05566 05574 05575 05576 05579 05580 05581 05582 05583 05584 05590 05591 05592 05593 05594 05595 05596 05597 05598 05599 05618 05619 08888 10001 43538] def
+
+
+/midGen { % start -> proc
+	% the following procedure follows the following protocol:
+	% 	- it leaves two values on the stack: iterator and value
+	%	- the iterator is plugged back in the procedure by the seqNext procedure in place of the DUMMY element
+	%   - the value is what gets returned by the seqNext procedure 
+	{ DUMMY % _ -> value advance
+		dup
+		Mid exch get
+		exch 1 add
+	} dup 0 % start proc proc 0 
+	4 -1 roll put
+} def
+
+
+/seqGen { % start -> proc
+	% the following procedure follows the following protocol:
+	% 	- it leaves two values on the stack: value and iterator 
+	%	- the iterator is plugged back in the procedure by the seqNext procedure in place of the DUMMY element
+	%   - the value is what gets returned by the seqNext procedure 
+	{ DUMMY % _ -> value advance 
+		dup
+		1 add
+	} dup 0 % start proc proc 0 
+	4 -1 roll put
+} def
+
+
+/seqNext { % /proc -> value
+	% the proc must be of the { DUMMY ... } form
+	dup load exec % /proc value iterator 
+	3 -1 roll
+	load 0 % value iterator {DUMMY ...} 0
+	3 -1 roll put
+} bind def
+
+
+/testTingOidGeneration {<<>>begin % _ -> _
+	15065 tingId2Oid getOidPattern [/oidPattern ]#==
+	oidPattern
+		 [[4 4 4 4] [4 2 0 2] [5 2 2 3] [4 0 3 3]]
+		eqValue assert
+	oidPattern getPatternOffsets
+		[
+			[[0 0] [0 0] [0 0] [0 0]] 
+			[[0 0] [-1 1] [1 -1] [-1 1]] 
+			[[1 0] [-1 1] [-1 1] [1 1]] 
+			[[0 0] [1 -1] [1 1] [1 1]]
+		]
+		eqValue assert
+
+	15066 tingId2Oid getOidPattern [/oidPattern ]#==
+	oidPattern
+		[[4 4 4 4] [4 0 0 2] [5 2 2 3] [4 1 0 0]]
+		eqValue assert
+	oidPattern getPatternOffsets
+		[
+			[[0 0] [0 0] [0 0] [0 0]] 
+			[[0 0] [1 -1] [1 -1] [-1 1]] 
+			[[1 0] [-1 1] [-1 1] [1 1]] 
+			[[0 0] [-1 -1] [1 -1] [1 -1]] 
+		]
+		eqValue assert
+end} def
+
+
+/drawVars {<<>>begin % x y [vars] -> _
+	[/x /y /vars ] #=
+	gsave
+		x y moveto
+		[	vars 
+			{
+				dup toStr
+				exch cvx exec toStr
+				( ) exch
+				( )
+			} forall
+		] sconcat show
+	grestore
+end} def
+
+
+/drawTitle {<<>>begin % x y -> _
+	[/x /y ] #=
+	x y [/dpi /dotSize /drawDot' /pxPerPoint /pxPerPoint /centreOffset /patternWidth /patternHeight /dotOffset /dotOffset' /tingId ] drawVars
+end} def
+
+
+% Input: Margins PageSize oidPatch
+/drawContactSheet {<<>>begin % {nextTingId} -> _
+	[/nextTingId ]#=
+	
+	Margins aload pop [/left /top /right /bottom ]#=
+	PageSize aload pop [/paperWidth /paperHeight ]#=
+	[PageSize [left right add top bottom add] {sub} a2forall] [/workArea ]#==
+	
+	/tingId [] def
+	left bottom 
+		workArea aload pop 
+		% oidPatch aload pop labelHeight add
+		oidPatch aload pop
+		{	[/x /y /width /height ] #=
+			/tingId /nextTingId seqNext gdef
+			tingId tingId2Oid [/oid ]#=
+			oid
+			% x y labelHeight add
+			x y
+			oidPatch aload pop
+				drawOidImage
+			
+			% label the pattern
+			% x xLabelOffset add FontSize 3 div sub y moveto
+			x xLabelOffset add y yLabelOffset add moveto
+			[tingId toStr (|) oid toStr] sconcat show
+		} tile
+	left paperHeight top sub drawTitle
+	/nextTingId load
+end} def
+
+
+/drawOidCenteredOnPage {<<>>begin % tingId -> _
+	[/tingId ]#==
+	
+	Margins aload pop [/left /top /right /bottom ]#=
+	PageSize aload pop [/paperWidth /paperHeight ]#=
+	[PageSize [left right add top bottom add] {sub} a2forall] [/workArea ]#==
+
+	tingId tingId2Oid [/oid ]#==
+	oid
+	% x y labelHeight add
+	workArea oidPatch {sub 2 div} a2forall % x y
+	oidPatch aload pop
+		drawOidImage
+end} def
+	
+
+end	% tingOid
+
+%%EndProlog
+
+%%BeginSetup
+%%EndSetup
+
+%%BeginScript
+%%EndScript
+
+%%Trailer
+%%EOF

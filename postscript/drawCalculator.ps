@@ -1,0 +1,410 @@
+%!PS-Adobe-3.0
+%%Title: drawCalculator.ps
+%%BoundingBox: 0 0 597 842
+%%DocumentPaperSizes: a4
+%%DocumentMedia: a4 595 842 0 () ()
+%%Orientation: Portrait
+%%DocumentNeededResources: procset net.anastigmatix.Import 0.1 13
+%%+ procset net.anastigmatix.PNG 0.1 7
+%%Creator: Glaukon Ariston
+%%Copyright: Glaukon Ariston. All Rights Reserved
+%%Date: 10/05/2016
+%%LanguageLevel: 3
+%%EndComments
+
+% http://ghostscript.com/doc/9.20/Use.htm#Input_control
+% http://ghostscript.com/doc/9.20/Use.htm#Parameters
+% 
+% gswin32c -sOutputFile#oid.pdf -c ".setpdfwrite <</NeverEmbed [ ] /AlwaysEmbed [/Courier]>> setdistillerparams /tingId 1500 def" @ps2pdf-oid.opt
+
+
+
+%%BeginProlog
+
+(Resource/ProcSet/net.anastigmatix.MetaPre) run
+(Resource/ProcSet/net.anastigmatix.StreamIO) run
+(Resource/ProcSet/net.anastigmatix.BinaryIO) run
+(Resource/Category/net.anastigmatix.filter) run
+%(Resource/net.anastigmatix.filter/FlateDecode) run
+%(Resource/net.anastigmatix.filter/DSCDecode) run
+%(Resource/net.anastigmatix.filter/DSCDataEncode) run
+%(Resource/net.anastigmatix.filter/InUPathDecode) run
+%(Resource/net.anastigmatix.filter/WSMarkEncode) run
+(Resource/ProcSet/net.anastigmatix.Import) run
+(Resource/ProcSet/net.anastigmatix.PNG) run
+
+(include/misc.ps) run
+(include/tingOid.ps) run
+
+%%EndProlog
+
+
+
+%%BeginSetup
+
+/net.anastigmatix.Import /ProcSet findresource begin
+/net.anastigmatix.PNG    /ProcSet findresource begin
+userdict begin
+misc begin
+tingOid begin
+
+
+/drawPattern true def
+/drawKeyLabel false def
+/drawTingIdLabel false def
+/drawImage false def
+
+/tingLogo (../resources/click-ting-logo_cmy-k.eps) def
+/tingLogoPatch [20 mm 20 mm] def
+
+
+%	[(M2.) (../apps/calculator/print/marijana.jpg)]
+%	[(T.) (../apps/calculator/print/tata.jpg)]
+%	[(N.) (../apps/calculator/print/neven.jpg)]
+%	[(M.) (../apps/calculator/print/mikula.jpg)]
+%	[(V.) (../apps/calculator/print/vjeko.jpg)]
+%	[(L.) (../apps/calculator/print/lovre.jpg)]
+/mapKeyFile [
+	[(M2.) (../apps/calculator/print/marijana_cmy-k.eps)]
+	[(T.) (../apps/calculator/print/tata_cmy-k.eps)]
+	[(N.) (../apps/calculator/print/neven_cmy-k.eps)]
+	[(M.) (../apps/calculator/print/mikula_cmy-k.eps)]
+	[(V.) (../apps/calculator/print/vjeko_cmy-k.eps)]
+	[(L.) (../apps/calculator/print/lovre_cmy-k.eps)]
+	] def
+
+
+/PageSize [
+	210 mm %width
+	297 mm %height
+] def
+
+/A4Margins [
+	1 inch %left
+	1 inch %top
+	1 inch %right
+	1 inch %bottom
+] def
+
+/LabelFontSize 8 def
+
+/Margins A4Margins def
+/DPI 1200 def
+
+%%EndSetup
+
+
+
+%%BeginScript
+
+/loadMapFile {<<>>begin % mapFile -> [[(name) tingId)]]
+	[/mapFile ]#==
+	mapFile (r) file [/fileHandle ]#=
+	[] [/tingIdMap ]#=
+	{
+		% read the (tingid, name) pair from the map file
+		fileHandle 1024 string readline not [/eof ]#=
+		% map file format is: tingId <space> name <eol>
+		token not
+		% check for an error while reading the line
+		{exit} if 
+		[/name /tingId ]#=
+		% append to the tingIdMap
+		[ tingIdMap #_ [ name tingId ] ] [/tingIdMap ]#=
+		% check for end of file
+		eof {exit} if 
+	} loop
+	fileHandle closefile
+	% return the map
+	tingIdMap
+end } def
+
+
+/drawCentredLabel {<<>>begin % lineWidth cmyk label -> _
+	[/lineWidth /cmyk /label ] #=
+	% label the pattern
+	gsave
+		oidPatch #y [/FontSize ]#==
+		/Calibri findfont FontSize scalefont setfont
+
+		% https://color.adobe.com/create/color-wheel/?base=2&rule=Analogous&selected=0&name=My%20Color%20Theme&mode=cmyk&rgbvalues=1,0.3270833333331894,0.050000000000000044,0.91,0.17157291666660116,0.04550000000000004,1,0,0,0.91,0.04550000000000004,0.4777500000001965,1,0.050000000000000044,0.999999999999784&swatchOrder=0,1,2,3,4
+		newpath
+			[x y] [width height] [label textSize] centerWithinBox
+				moveto
+		label true charpath
+		lineWidth setlinewidth
+		cmyk #_ setcmykcolor
+		stroke
+	grestore
+end } def
+
+
+/drawTingIdPattern {<<>>begin % tingId x y patch@[width height] -> _
+	[/tingId /x /y /patch ]#=
+	tingId tingId2Oid [/oid ]#=
+	oid
+	x y
+	patch #_
+		drawOidImage
+end } def
+
+
+/drawCentredTingIdLabel {<<>>begin % _ -> _
+	gsave
+		/Calibri findfont LabelFontSize scalefont setfont
+		newpath
+		[x y] [width height] oidPatch centerWithinBox
+			LabelFontSize 1.1 mul sub
+			moveto
+		0 0.67 0.95 0 setcmykcolor
+		tingId 32 string cvs show
+	grestore
+end } def
+
+
+/jpegShow {<<>>begin % filePath [x y] patch@[width height] -> _
+	[/filePath /xy /patch ]#=
+	(r) filePath file [/fileHandle] #=
+	gsave 
+		fileHandle StatJFIF pop 
+		ReadyJFIF [/wx /wy ]#=
+		xy #_
+			translate
+		patch #x wx div dup scale
+		ExecJPEG 
+	grestore 
+end } def
+
+
+/epsBoundingBox {<<>>begin % filePath -> [x y width height]
+	/extractDims { % post match pre -> [x y width height]
+		() eq {
+			pop
+			/post exch def
+			[([) post (])] sconcat cvx exec
+			exch
+			exit
+		} {
+			pop pop				
+		} ifelse
+	} def
+	(r) file
+	{
+		dup 1024 string readline
+		not {
+			exit
+		} if
+		(%%HiResBoundingBox: ) search
+		{
+			extractDims
+		} {
+			(%%BoundingBox: ) search
+			{
+				extractDims
+			} {
+				pop
+			} ifelse
+		} ifelse
+	} loop
+	closefile
+end} def
+
+
+/epsShow {<<>>begin % filePath [x y] patch@[width height] -> _
+	[/filePath /xy /patch] #=
+	filePath epsBoundingBox [/bbox] #=
+	% EPS{begin}
+	save
+	xy #_ translate
+	patch #x bbox #width div dup scale
+	countdictstack
+	mark
+	newpath
+	/showpage {} def
+	/setpagedevice {pop} def
+	filePath run % run EPS
+	cleartomark
+	countdictstack
+	exch sub { end } repeat
+	restore
+	% EPS{end}
+end} def
+
+
+/drawScaledImage { % filePath -> _
+	stripBeforeLastDot 
+	(eps) eq {
+		epsShow 
+	} { 
+		jpegShow 
+	} ifelse 
+} def
+
+
+/drawImageLabel {<<>>begin % _ -> _
+	mapKeyFile key mapGet
+	{
+		[/filePath] #=
+		[filePath (\n)] sconcat print
+		filePath
+			[[x y] [width height] oidPatch centerWithinBox]
+			gsave
+				dup #_ oidPatch #_ rectclip
+				oidPatch filePath drawScaledImage
+			grestore
+	} if
+end } def
+
+
+/drawKey {<<>>begin % x y width height -> _
+	[/x /y /width /height ]#=
+	/iterator seqNext [/i ]#=
+	keys i get [/key ]#=
+	mapTingIdName key mapGet
+	{ 	[/tingId ]#=
+		drawKeyLabel {
+			[ (0) (1) (2) (3) (4) (5) (6) (7) (8) (9) ] key elem
+			{0} {1} ifelse
+			[[0.93 0.85 0 0] [0.25 0.93 0 0]] exch get [/cmyk ]#=
+			1 cmyk key drawCentredLabel
+		} if
+		drawTingIdLabel {drawCentredTingIdLabel } if
+		drawImage {drawImageLabel } if
+		drawPattern { 
+			tingId
+			[x y] [width height] oidPatch centerWithinBox
+			oidPatch
+				drawTingIdPattern 
+		} if
+	} if
+end } def
+
+
+/keyboardArea {<<>>begin % keys columns -> width height
+	[/keys /columns ]#=
+	oidPatch #x
+		keySeparation #x
+		add
+		columns mul
+	oidPatch #y
+		keySeparation #y
+		add
+		keys length columns idiv mul
+end } def
+
+
+/drawKeyboard {<<>>begin % _ -> _
+	/oidPatch [20 mm 20 mm] def
+	/keySeparation [oidPatch {3 div} forall] def
+	/columns 5 def
+	
+	[	()   (7) (8) (9) (/)
+		()   (4) (5) (6) (*)
+		(CE) (1) (2) (3) (-)
+		(C)  ()  (0) (=) (+)
+	] [/keys ]#=
+	0 seqGen [/iterator ]#=
+	keys columns keyboardArea [/keyboardMainWidth /keyboardMainHeight ]#=
+	left bottom 
+	keyboardMainWidth keyboardMainHeight
+	columns keys length columns idiv
+	/drawKey load
+		tabulateTL
+
+	[ (LCD)	] [/keys ]#=
+	/oidPatch [keyboardMainWidth 20 mm] def
+	/lcdHeight oidPatch #y def
+	0 seqGen [/iterator ]#=
+	left [bottom keyboardMainHeight keySeparation #x] sum
+	keyboardMainWidth lcdHeight
+		drawKey
+
+	[	(T.)  (M2.) (N.)
+		(L.)  (V.)  (M.)  
+	] [/keys ]#=
+	/oidPatch [35 mm 35 mm] def
+	/columns 3 def
+	0 seqGen [/iterator ]#=
+	left [bottom keyboardMainHeight keySeparation #x lcdHeight keySeparation #x] sum
+	keys columns keyboardArea [/keyboardExtraWidth /keyboardExtraHeight ]#=
+	keyboardExtraWidth keyboardExtraHeight
+	columns keys length columns idiv
+	/drawKey load
+		tabulateTL
+	
+	% return keyboard's width and height
+	keyboardMainWidth [keyboardMainHeight keySeparation #y lcdHeight keySeparation #y keyboardExtraHeight] sum
+end } def
+
+
+/drawRegistrationMarks {<<>>begin % _ -> _
+	/markSize 36 def
+	gsave 
+		newpath
+		3 px setlinewidth
+		0 0 0 100 setcmykcolor
+		left markSize sub top moveto markSize 0 rlineto
+		left top markSize sub moveto 0 markSize rlineto
+
+		stroke
+	grestore
+end } def
+
+
+/drawTingLogo {<<>>begin % _ -> _
+	[left [bottom 5 mm keyboardHeight] sum] 
+	[keyboardWidth tingLogoPatch #y] 
+	tingLogoPatch 
+		centerWithinBox [/x /y ]#=
+
+	drawImage {
+		tingLogo
+			[x y]
+			tingLogoPatch 
+			tingLogo drawScaledImage
+	} if
+
+	drawPattern { 
+		bookId
+		x y
+		tingLogoPatch
+			drawTingIdPattern 
+	} if
+end } def
+
+
+/drawCalculator {<<>>begin % mapFile -> _
+	loadMapFile [/mapTingIdName ]#=
+	(include/map_tingId_oid.ps) run
+	DPI 2 /squareDot defineConstants
+	
+	Margins #_ [/left /top /right /bottom ]#=
+	PageSize #_ [/paperWidth /paperHeight ]#=
+	[PageSize [left right add top bottom add] {sub} a2forall] [/workArea ]#==
+
+	drawKeyboard [/keyboardWidth /keyboardHeight ]#=
+	drawTingLogo
+	drawRegistrationMarks
+end } def
+
+
+% Main
+{
+	/bookId 8001 def
+	
+	bookId 32 string cvs
+	(0) 5 padLeft [/bookIdStr ]#=
+
+	[(../books/) bookIdStr (/) bookIdStr (_en.map)] sconcat 
+		drawCalculator
+
+	showpage
+} exec
+
+
+end % tingOid
+end % misc
+%%EndScript
+
+%%Trailer
+%%EOF

@@ -1,0 +1,668 @@
+/*
+Date: 30.03.2016
+Author: Glaukon Ariston
+About: 
+	An 010Editor binary template for Ting pen's binary script embedded in an OUF file.
+	http://www.ting-el-tangel.de/doku.php?id=skripte
+	http://www.ting.eu
+
+Known operations:
+
+end
+clearver
+set
+cmp
+and
+or
+not
+jmp
+je
+jne
+jg
+jge
+jb
+jbe
+add
+sub
+return
+callid
+playoid
+pause
+
+*/
+#define ASSERT 0
+
+typedef byte int8;
+typedef ubyte uint8;
+
+//local int64 scriptStart = 0;
+
+enum <uint8> OpCode {
+	  END 		= 0x00
+	, CLEARVER 	= 0x01
+	, SET 		= 0x02
+	, CMP 		= 0x03
+	, AND 		= 0x04
+	, OR 		= 0x05
+	, NOT 		= 0x06
+
+	, JMP 		= 0x08
+	, JE 		= 0x09
+	, JNE 		= 0x0A
+	, JG 		= 0x0B
+	, JGE 		= 0x0C
+	, JB 		= 0x0D
+	, JBE 		= 0x0E
+	, ADD 		= 0x0F
+	, SUB 		= 0x10
+
+	, RETURN	= 0x14
+	, CALLID 	= 0x15
+	, PLAYOID 	= 0x16
+	, PAUSE 	= 0x17
+	, OpCode_LAST = 0x19
+};
+
+
+string operation(uint8 opcode) {
+	local string s;
+	switch(opcode) {
+	case END: return "end"; 
+	case CLEARVER: return "clearver"; 
+	case SET: return "set"; 
+	case CMP: return "cmp"; 
+	case AND: return "and"; 
+	case OR: return "or"; 
+	case NOT: return "not"; 
+	case 0x07: return "0x07"; 
+	case JMP: return "jmp"; 
+	case JE: return "je"; 
+	case JNE: return "jne"; 
+	case JG: return "jg"; 
+	case JGE: return "jge"; 
+	case JB: return "jb"; 
+	case JBE: return "jbe"; 
+	case ADD: return "add"; 
+	case SUB: return "sub"; 
+	case 0x11: return "0x11"; 
+	case 0x12: return "0x12"; 
+	case 0x13: return "0x13"; 
+	case RETURN: return "return"; 
+	case CALLID: return "callid"; 
+	case PLAYOID: return "playoid"; 
+	case PAUSE: return "pause"; 
+	case 0x18: return "0x18"; 
+	case 0x19: return "0x19"; 
+	default:
+		Assert(0, SPrintf(s, "Unknown script opcode %02X", opcode));
+		break;
+	}
+	return "#ERROR";
+}
+
+
+enum <uint8> OperandType {
+	  OPERAND_NONE 		= 0x00
+	, REGISTER_VALUE 	= 0x01
+	, REGISTER_REGISTER = 0x02
+	, OperandType_LAST = 0x02
+};
+
+
+string operandType(uint8 type) {
+	local string s;
+	switch(type) {
+	case OPERAND_NONE: return "None"; 
+	case REGISTER_VALUE: return "RV"; 
+	case REGISTER_REGISTER: return "RR"; 
+	default:
+		Assert(0, SPrintf(s, "Unknown operand type %02X", type));
+		break;
+	}
+	return "#ERROR";
+}
+
+
+typedef struct {
+	OpCode code;
+	if(code != END || !FEof()) {
+		OperandType type;
+		switch(type) {
+		case OPERAND_NONE: 
+			break;
+		case REGISTER_VALUE: 
+			break;
+		case REGISTER_REGISTER: 
+			break;
+		default: 
+			Assert(code == END, SPrintf(s, "Unknown operand type %02X", type));
+			break;
+		}
+	}
+
+	ASSERT && Assert(
+		code >= 0 && code <= OpCode_LAST && code != 0x07 && (code <= SUB || code >= RETURN)
+		, SPrintf(s, "Unknown script opcode %02X", code)
+	);
+} OpCodePart;
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	if(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER) {
+		uint16 op2;
+	}
+} Cmd<read=readCmd>;
+
+
+string disasmOp2(const OpCodePart& opcode, uint16 op1, uint16 op2, int full) {
+	local string s;
+	local int64 scriptStart = startof(parentof(parentof(opcode)));
+	if(full) {
+		local int64 scriptOffset = startof(parentof(opcode)) - scriptStart;
+		local string format = opcode.type == REGISTER_VALUE 
+			? "%04LX: %02X %02X %04X %04X %s v%d,%d"
+			: "%04LX: %02X %02X %04X %04X %s v%d,v%d";
+		SPrintf(s, format
+			, scriptOffset, opcode.code, opcode.type, op1, op2
+			, operation(opcode.code)
+			, op1
+			, op2
+		);
+	} else {
+		local string format = opcode.type == REGISTER_VALUE 
+			? "%s v%d,%d"
+			: "%s v%d,v%d";
+		SPrintf(s, format
+			, operation(opcode.code)
+			, op1
+			, op2
+		);
+	}
+	return s;
+}
+
+
+string disasmOp1(const OpCodePart& opcode, uint16 op1, int full) {
+	local string s;
+	local int64 scriptStart = startof(parentof(parentof(opcode)));
+	if(full) {
+		local int64 scriptOffset = startof(parentof(opcode)) - scriptStart;
+		local string format = opcode.type == REGISTER_VALUE 
+			? "%04LX: %02X %02X %04X      %s %d"
+			: "%04LX: %02X %02X %04X      %s v%d";
+		SPrintf(s, format
+			, scriptOffset, opcode.code, opcode.type, op1
+			, operation(opcode.code)
+			, op1
+		);
+	} else {
+		local string format = opcode.type == REGISTER_VALUE 
+			? "%s %d"
+			: "%s v%d";
+		SPrintf(s, format
+			, operation(opcode.code)
+			, op1
+		);
+	}
+	return s;
+}
+
+
+string disasmOpOffset(const OpCodePart& opcode, uint16 op1, int full) {
+	local string s;
+	local int64 scriptStart = startof(parentof(parentof(opcode)));
+	if(full) {
+		local int64 scriptOffset = startof(parentof(opcode)) - scriptStart;
+		local string format = opcode.type == OPERAND_NONE 
+			? "%04LX: %02X %02X %04X      %s %LX"
+			: "%04LX: %02X %02X %04X      %s v%d";
+		SPrintf(s, format
+			, scriptOffset, opcode.code, opcode.type, op1
+			, operation(opcode.code)
+			, opcode.type == OPERAND_NONE ? op1 : op1
+		);
+	} else {
+		local string format = opcode.type == OPERAND_NONE 
+			? "%s %LX"
+			: "%s v%d";
+		SPrintf(s, format
+			, operation(opcode.code)
+			, opcode.type == OPERAND_NONE ? op1 : op1
+		);
+	}
+	return s;
+}
+
+
+string disasmOp0(const OpCodePart& opcode, int full) {
+	local string s;
+	local int64 scriptStart = startof(parentof(parentof(opcode)));
+	if(full) {
+		local int64 scriptOffset = startof(parentof(opcode)) - scriptStart;
+		local string format = opcode.code == END 
+			? "%04LX: %02X              %s"
+			: "%04LX: %02X %02X           %s";
+		if(opcode.code == END) {
+			SPrintf(s, format
+				, scriptOffset, opcode.code
+				, operation(opcode.code)
+			);
+		} else {
+			SPrintf(s, format
+				, scriptOffset, opcode.code, opcode.type
+				, operation(opcode.code)
+			);
+		}
+	} else {
+		local string format = "%s";
+		SPrintf(s, format
+			, operation(opcode.code)
+		);
+	}
+	return s;
+}
+
+
+string disasmOp(const OpCodePart& opcode, int full) {
+	local string s;
+	switch(opcode.code) {
+	case END:  
+	case CLEARVER: 
+	case RETURN:
+		return disasmOp0(opcode, full);
+		break;
+	case JMP:
+	case JE:
+	case JNE:
+	case JG:
+	case JGE:
+	case JB:
+	case JBE:
+		return disasmOpOffset(opcode, parentof(opcode).op1, full);
+		break;
+	case NOT:
+	case CALLID:
+	case PLAYOID:
+	case PAUSE:
+		return disasmOp1(opcode, parentof(opcode).op1, full);
+		break;
+	case SET:
+	case CMP:
+	case AND:
+	case OR:
+	case ADD:
+	case SUB:
+		return disasmOp2(opcode, parentof(opcode).op1, parentof(opcode).op2, full);
+		break;
+	case 0x07:
+	case 0x11:
+	case 0x12:
+	case 0x13:
+	case 0x18:
+	case 0x19:
+		if(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER) {
+			return disasmOp2(opcode, parentof(opcode).op1, parentof(opcode).op2, full);
+		} else {
+			return disasmOp1(opcode, parentof(opcode).op1, full);
+		}
+		break;
+	default:
+		Assert(0, SPrintf(s, "Unknown script opcode %02X", opcode));
+		break;
+	}
+	return "#ERROR";
+}
+
+
+string readCmd(Cmd& a) {
+	if(a.opcode.type == REGISTER_VALUE || a.opcode.type == REGISTER_REGISTER) {
+		return disasmOp2(a.opcode, a.op1, a.op2, FULL_DISASM);
+	} else {
+		return disasmOp1(a.opcode, a.op1, FULL_DISASM);
+	}
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+
+	endOfScript = 1;
+	//Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} End<read=readEnd>;
+
+
+string readEnd(End& a) {
+	return disasmOp0(a.opcode, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Clearver<read=readClearver>;
+
+
+string readClearver(Clearver& a) {
+	return disasmOp0(a.opcode, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	uint16 op2;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Set<read=readSet>;
+
+
+string readSet(Set& a) {
+	return disasmOp2(a.opcode, a.op1, a.op2, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	uint16 op2;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Cmp<read=readCmp>;
+
+
+string readCmp(Cmp& a) {
+	return disasmOp2(a.opcode, a.op1, a.op2, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	uint16 op2;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} And<read=readAnd>;
+
+
+string readAnd(And& a) {
+	return disasmOp2(a.opcode, a.op1, a.op2, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	uint16 op2;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Or<read=readOr>;
+
+
+string readOr(Or& a) {
+	return disasmOp2(a.opcode, a.op1, a.op2, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	uint16 op2;
+
+	Assert(opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_REGISTER");
+} Not<read=readNot>;
+
+
+string readNot(Not& a) {
+	return disasmOp1(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	//Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Jmp<read=readJmp>;
+
+
+string readJmp(Jmp& a) {
+	return disasmOpOffset(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Je<read=readJe>;
+
+
+string readJe(Je& a) {
+	return disasmOpOffset(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Jne<read=readJne>;
+
+
+string readJne(Jne& a) {
+	return disasmOpOffset(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Jg<read=readJg>;
+
+
+string readJg(Jg& a) {
+	return disasmOpOffset(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Jge<read=readJge>;
+
+
+string readJge(Jge& a) {
+	return disasmOpOffset(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Jb<read=readJb>;
+
+
+string readJb(Jb& a) {
+	return disasmOpOffset(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Jbe<read=readJbe>;
+
+
+string readJbe(Jbe& a) {
+	return disasmOpOffset(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	uint16 op2;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Add<read=readAdd>;
+
+
+string readAdd(Add& a) {
+	return disasmOp2(a.opcode, a.op1, a.op2, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+	uint16 op2;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Sub<read=readSub>;
+
+
+string readSub(Sub& a) {
+	return disasmOp2(a.opcode, a.op1, a.op2, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+
+	Assert(opcode.type == OPERAND_NONE, "opcode.type == OPERAND_NONE");
+} Return<read=readReturn>;
+
+
+string readReturn(Return& a) {
+	return disasmOp0(a.opcode, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Callid<read=readCallid>;
+
+
+string readCallid(Callid& a) {
+	return disasmOp1(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Playoid<read=readPlayoid>;
+
+
+string readPlayoid(Playoid& a) {
+	return disasmOp1(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct {
+	OpCodePart opcode;
+	uint16 op1;
+
+	Assert(opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER, "opcode.type == REGISTER_VALUE || opcode.type == REGISTER_REGISTER");
+} Pause<read=readPause>;
+
+
+string readPause(Pause& a) {
+	return disasmOp1(a.opcode, a.op1, FULL_DISASM);
+}
+
+
+typedef struct (int64 endPos) {
+	//scriptStart = FTell();
+	local uint8 opcode;
+	endOfScript = 0;
+	while(!FEof() && FTell() < endPos) {
+		opcode = ReadByte(FTell());
+		switch(opcode) {
+		case END:
+			End cmd;
+			break;
+		case CLEARVER:
+			Clearver cmd;
+			break;
+		case SET:
+			Set cmd;
+			break;
+		case CMP:
+			Cmp cmd;
+			break;
+		case AND:
+			And cmd;
+			break;
+		case OR:
+			Or cmd;
+			break;
+		case NOT:
+			Not cmd;
+			break;
+		case JMP:
+			Jmp cmd;
+			break;
+		case JE:
+			Je cmd;
+			break;
+		case JNE:
+			Jne cmd;
+			break;
+		case JG:
+			Jg cmd;
+			break;
+		case JGE:
+			Jge cmd;
+			break;
+		case JB:
+			Jb cmd;
+			break;
+		case JBE:
+			Jbe cmd;
+			break;
+		case ADD:
+			Add cmd;
+			break;
+		case SUB:
+			Sub cmd;
+			break;
+		case RETURN:
+			Return cmd;
+			break;
+		case CALLID:
+			Callid cmd;
+			break;
+		case PLAYOID:
+			Playoid cmd;
+			break;
+		case PAUSE:
+			Pause cmd;
+			break;
+		default:
+			Cmd cmd;
+			//Assert(0, SPrintf(s, "Unknown script opcode %02X", opcode));
+			break;
+		}
+	}
+} OUFBinaryScript;
+
+

@@ -1,0 +1,61 @@
+%!PS-Adobe-3.0 Resource-net.anastigmatix.filter
+%%Title: WSMarkEncode - filter to watermark ASCII85/Hex output
+%%DocumentNeededResources: Category net.anastigmatix.filter 0.1 7
+%%+ procset net.anastigmatix.StreamIO 0.1 8
+%%DocumentSuppliedResources: net.anastigmatix.filter WSMarkEncode 0.1 6
+%%Version: 0.1 6
+%%For: Chapman Flack - www.anastigmatix.net
+%%Creator: makeWSMarkEncode 1.6 using AFPL Ghostscript 851
+%%CreationDate: 2009-11-08 23:54:46
+%%LanguageLevel: 2
+%%VMlocation: global
+%%VMusage: 1876 1392
+%%EndComments
+%%BeginProlog
+%%IncludeResource: Category net.anastigmatix.filter 0.1 7
+%%IncludeResource: procset net.anastigmatix.StreamIO 0.1 8
+%%BeginResource: net.anastigmatix.filter WSMarkEncode 0.1 6 1876 1392
+% VMusage measured in Adobe PostScript(r) 3010.108 on a Phaser 750 (PowerPC)
+% Usage after vmreclaim: 1168
+
+% Copyright Chapman Flack, www.anastigmatix.net. May be freely used and
+% distributed without modification provided this notice remains intact.
+% Provided in the hope that it will be useful but AS-IS WITHOUT ANY EXPRESS
+% OR IMPLIED WARRANTY AND WITHOUT REPRESENTATION AS TO ITS SUITABILITY FOR
+% ANY PURPOSE.  
+
+%%BeginData:         30 ASCII Lines
+currentfile /ASCII85Decode filter cvx exec
+0 3;(H @<--  PDI   [TqAM  7q4F=q !>@<6O)B5M(!Bm; 7BBl%m&EZfC6F)Q2A@qB_'@<?
+  X5H  ]iN-  !  g7   /BO  roiWI  ?IQXP#O)PATTP5D IIU.BkM9kFD5tP;fm%k@;SS30
+2 Q\-   @oH r\ P1l'. L^T  A'Opt  oDEcP`/FDtYuCM@ [!N<+*3FDtYuCM@[!P1PZoP2@
+o F@U X .eN WC ;DART+fDJ   XT]   1G:    A"@ s !_ 3-  $!R*A8c@%H'0s:/p(fDNW
+F  TL A RT  +f   DJXT]1G : @kA < e8 ;!W W3#  !HM a  [A8c@%H'0s:/n/O:H\_c[s
+,  r  /  #  98E     V3=G R 6G; N a\95)9 K-C 5<+X   WKIdJ!KmS6Oq*X20.q3_Ap]
+\` P ')` a I?G)'1G:  A"G \  h  _ _!g    4FW "d2u   D#a.iD3/@Qt4aW?7I=%,lI?
+IT n 5)9 B *=  GR9H9 9M8 j! 0 TK lP  ') 2"P %oE. <  JUgA=GR3F99QB>M39EQ5*C
+bc   /;O   @j) 2J9UA s,? 6! 0 Ur W  E\B 'uE ,]E9 L]  rrDL]il6L]W`AP$p!s/oY
+cA  H\_i  g=GR  'B9  8EV 3=H  [) G  0.  q3_ Ap]= ;P$ !MKP"RG]/n/O:P!=a*P$!
+MIP "Us%P "UZs!     !!"^ 8pu k&I ?I   T  YP #Zpn %[&  V$/o5`PBlmp5P!5$g0/"
+qe@;]_@Ap]\`I=$bOP$!MAP"UT3P$!l,0/"qs@s!ksH\_ff=GR!@99M8j!Kp*3!0V2GP')2"L]
+N;4P'Dc`P$!M_P.Z4+<IL$0P.rY'/p(fDP&5Q%!KpQ@!Kp*=!g7\QL]NY>OuS7#P$!MDP"Us1H
+]iN-!KmJ>!/L`?=GR$A98Eq<]R>rB0/"qsG\iO-H\_ce=GR$A98F^R]R>-i5^eeqI?J/t"-QcB
+!Kp*=       $^,X\P#Qjm<K_<JOuS7%P"U.b3/@X  !94MdVF(JrtCh8$X<.0p/L^TA=I?G)'
+1QpWK       /no0CA:'IK6t(1G;f?f!@qCf_P-6N  NBl%@&H#R>XD0qF*P-6N[FE2)5B68E<
+AWf3' P1Pj\OuR)aBOt[hP2D&rOpR9ZOtr1aP2C\N  </:O7!&%8n@Rb'JAOL*>De*FBfmT#_=
+(u2eB SZnV!Jh# E   ;FkA   5B4u   CM$'I     9(!    /LYHASGdjFGKs\WKK8gL]`fB
+P,3s< P$!M@P$!  lr  P' )q  1P  'E -LI ?I   -a  Fc nqOFcnpuCi=B+Anc'mI?G)'1
+G:@kB       7# e*O  r  fcM L  ]W_  W  P$i  X  "99  MK%Fa\V"Fcpm15CJ\pI?G)'
+1G:@n @<-^N!Kp Pt@  q  ]F`CQ  `Y"f 9 -8`L  ]       ET%P"_#?P%'R\Opc\bP')29
+<IL#? Ou"am;b^ \@C  I  N,NDe  *F+O p s&t/  o  5`PBlmpL5)fT+hckm:L]C_D5*@m<
+@q]F` CQdS<*\U T/A  9  ;LJ 9  9L>  L  87c  L  JBQ  TD102-(tAP?ZQB67gC8hVhM
+A7q&i       01 0Po  F(  J  <Z  Eb As*  N   ;t  Ub /nAUX5;,TF@:s.G@<?O(G^GT
+eI4m6       +A 7q&  iL^   #Lc/   n\U5P   ! :U%   ;flSiL]B(]/nAUX5;-/<FCfEI
+!&#uXA7q&i019A]De*E40.pdG0/"qgB9GK8!\Z2ZB45hD5DT?'V32m_3A3$<Bl.m$P!=a3OpR9
+Z01BbgDe*F-Oq*X8OuY15ATTP5DIIU.BkM9kFD5tPAnc('ATAo(AS,XoATD@'Dfp)1AWh1WATV
+m"@r#drB)~>
+% net.anastigmatix.Packager 0.1 5
+%%EndData
+%%EndResource
+%%EndProlog
+%%EOF

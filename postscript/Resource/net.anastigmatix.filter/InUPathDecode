@@ -1,0 +1,47 @@
+%!PS-Adobe-3.0 Resource-net.anastigmatix.filter
+%%Title: InUPathDecode - filter to generate bitmap from inufill
+%%DocumentNeededResources: Category net.anastigmatix.filter 0.1 7
+%%+ procset net.anastigmatix.StreamIO 0.1 8
+%%DocumentSuppliedResources: net.anastigmatix.filter InUPathDecode 0.1 5
+%%Version: 0.1 5
+%%For: Chapman Flack - www.anastigmatix.net
+%%Creator: makeInUPathDecode 1.5 using AFPL Ghostscript 851
+%%CreationDate: 2009-11-08 23:54:36
+%%LanguageLevel: 2
+%%VMlocation: global
+%%VMusage: 1688 1420
+%%EndComments
+%%BeginProlog
+%%IncludeResource: Category net.anastigmatix.filter 0.1 7
+%%IncludeResource: procset net.anastigmatix.StreamIO 0.1 8
+%%BeginResource: net.anastigmatix.filter InUPathDecode 0.1 5 1688 1420
+% VMusage measured in Adobe PostScript(r) 3010.108 on a Phaser 750 (PowerPC)
+% Usage after vmreclaim: 1324
+
+% Copyright Chapman Flack, www.anastigmatix.net. May be freely used and
+% distributed without modification provided this notice remains intact.
+% Provided in the hope that it will be useful but AS-IS WITHOUT ANY EXPRESS
+% OR IMPLIED WARRANTY AND WITHOUT REPRESENTATION AS TO ITS SUITABILITY FOR
+% ANY PURPOSE.  
+
+%%BeginData:         16 ASCII Lines
+currentfile /ASCII85Decode filter cvx exec
+01g%]:gnH  Z6tKkHA7[E3 ATTP5DII     U.BkM9kFD5tPAnc('ATAo6ATMd4Ear[%FCB96F
+*j'mL]W`     OH]fJ67t$ P"I?IP_D     ImoB@;]LpFD5B)@<?4./lQk4ARTFI:G5ObDdu^
+WFHY@@%  >Y. M23JDYF   `MM6DKKi +@r#drB8ln4ATVm"@r#drB9Ll+!Ku=n/nnjZBQ@ZmA
+ 8c@% H  '0s :/n/s?E0W *W#![V<  zz!'bu6!'^G`!'^G`!-2XZA8c@%H'0s:/o5Q>@:X_J
+ 3/@  T u99K  @>Fbg*^= GR*C98E      Y4=H[*>P')q1P')cbI=%,:L^9.EL]`fBL]`f5P
+  %K &s !Jgc  >=GR3F!J gi@=GR'  B=G R6G!I]<N!Jgi@=GR'B98EV3WJCY>=GR!@!Jg`(
+P #[ ;B P$!M @P"UrGP') q$Osc%hP$!MD  P"Ut.L]rrDL]W`4L^'#EL^'#8L]E/0J;=JerK
+; q  _L  ^'# EL]ilCP,s HCP$!lQH]gRK  !KpQJEfrV7P#R8;Oq2u(8<S+O"d2uD#Eh`C5)
+9   3%5  *C/ RFcpm1S<A #N#Eh`. P#Zp n%[&W2hi.YXATVm"@r#drB.klJB7#e*OrfcML]
+W_  WP$i     X"9 9MK%F a\V"Fcpm     15CJ\pI?G)'1G;=;<D[+GBLHEADe*F+Ops&t/o
+5Q>@:YNbN< ,4">DN98!*taOOuR)aBOt[ hP2DED03;juFD-h1Orc8IASGdjFHT9M:gnHZ9jr-
+aBm;9a/nniL0.pdJP!>*hB4GUd@r%6HP1Pj"H\_ZX#*MZC!g7#U$'G[EP#O)+D..'g9jr-aBm;
+9a/nniL0.pdJP!>+CP$Tdp/n/s?E0<DJ30G,7!Ks:B3J[s($'GZL6tKkHA7^1P%[&i83A58]F=
+q!>@<6O)B5M(!Bm;7BBl%m&EZen(Anc-oEb0<1F`Lu'P'(hWFDtYuCM@[!~>
+% net.anastigmatix.Packager 0.1 5
+%%EndData
+%%EndResource
+%%EndProlog
+%%EOF

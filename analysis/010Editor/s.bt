@@ -1,0 +1,70 @@
+/*
+Date: 30.03.2016
+Author: Glaukon Ariston
+About: 
+	An 010Editor binary template for Ting pen's binary script embedded in an OUF file.
+	http://www.ting-el-tangel.de/doku.php?id=skripte
+	http://www.ting.eu
+
+Known operations:
+
+end
+clearver
+set
+cmp
+and
+or
+not
+jmp
+je
+jne
+jg
+jge
+jb
+jbe
+add
+sub
+return
+callid
+playoid
+pause
+
+*/
+
+#include "s-types.bt"
+
+
+local string s;
+local string disassembly = "";
+local int endOfScript = 0;
+local int FULL_DISASM = 0;
+
+
+string disasm() {
+	Assert(exists(oufScript), "exists(oufScript)");
+	local string s;
+	local uint32 j; 
+	for(j=0; exists(oufScript.cmd[j]); j++) {
+		s += disasmOp(oufScript.cmd[j].opcode, /*full=*/1) + "\n";
+	}
+	return s;
+}
+
+
+string getDisassembly(string bookId, string tingId) {
+	local string s;
+	SPrintf(s, "# MID %s OID %s ORIGIN %LXh\n%s", bookId, tingId, startof(oufScript), disassembly);
+	return s;
+}
+
+
+//======================================================== Generate Structure
+void parseScript(int64 position, int64 size) {
+	FSeek(position);
+	BigEndian();
+	OUFBinaryScript oufScript(position+size);
+	disassembly = disasm();
+}
+
+
+parseScript(FTell(), FileSize());

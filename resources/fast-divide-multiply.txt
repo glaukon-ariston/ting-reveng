@@ -1,0 +1,12 @@
+http://www.hackersdelight.org/divcMore.pdf
+http://www.avrfreaks.net/forum/dis-asm-dirty-math-tricks-adventures-division-ten?page=all
+https://blogs.msdn.microsoft.com/devdev/2005/12/12/integer-division-by-constants/
+https://en.wikipedia.org/wiki/Double_dabble
+http://www.piclist.com/techref/language/ccpp/convertbase.htm
+http://www.piclist.com/techref/microchip/math/radix/index.htm
+http://www.piclist.com/techref/piclist/codegen/constdivmul.htm
+http://www.piclist.com/techref/microchip/math/basic.htm
+http://electronics.stackexchange.com/questions/12618/fastest-way-to-get-integer-mod-10-and-integer-divide-10
+http://stackoverflow.com/questions/2033210/c-fast-division-mod-by-10x
+http://stackoverflow.com/questions/16218228/fast-division-on-gcc-arm?lq=1
+http://stackoverflow.com/questions/5558492/divide-by-10-using-bit-shifts

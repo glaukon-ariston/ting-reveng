@@ -1,0 +1,226 @@
+/*
+Date: 05.04.2016
+Author: Glaukon Ariston
+About: 
+	Analyse binary scripts (extracted from Ting's OUF files).
+
+	This script is useful for searching through the binary code for some
+	pattern and then reporting about it. Use it as a boilerplate, just change
+	the pedicate() function to suit your need.
+
+	http://www.ting-el-tangel.de/doku.php?id=skripte
+	http://www.ting.eu
+
+*/
+
+// DIRE WARNING: Make sure your 010Editor instance doesn't have an *.s file loaded
+// already or your will get error complaining the types from s-types.bt have already
+// been defined.
+// In other words, open 010Editor, close all documents. close the editor. Then, you
+// can run this script.
+#include "common.1sc"
+#include "s-types.bt"
+
+local uint32 SCRIPT_COUNT_LIMIT = 30000;
+local int csvAggregateFileNo;
+local uint32 processedBooks = 0;
+
+
+//=================================================================== Statistics
+// csv
+local string csvDelimiter = ";";
+local string csvHeader = 
+	"bookId;tingId;opcode;optype;opcode_str;optype_str;value;offset;instrIndex;instructionCount";
+local string csvRowFormat = 
+	"\"%s\";\"%s\";0x%02X;0x%02X;\"%s\";\"%s\";0x%02X;0x%04X;0x%04X;0x%04X";
+local int logFile;
+local string bookId;
+
+
+void persistHeader(int fileNo) {
+	// workaround the bug in the 010Editor (current file position being reset to to zero, thus overwriting the previously written content)
+	FileSelect(fileNo);
+	FSeek(FileSize());
+	FPrintf(fileNo, "%s", csvHeader);
+	FPrintf(fileNo, "\n");
+	FileSave();
+}
+
+
+int openLog() {
+	local string statsFolder = getStatsFolder();
+	if(!FileExists(statsFolder)) {
+		MakeDir(statsFolder);
+	}
+	local string csvFilePath = statsFolder + "analyseScripts.csv";
+	local int csvFileNo = -1;
+	if(!FileExists(csvFilePath)) {
+		csvFileNo = FileNew();
+		persistHeader(csvFileNo);
+		FileSave(csvFilePath);
+	} else {
+		csvFileNo = FileOpen(csvFilePath);
+	}
+	Assert(csvFileNo >= 0, "csvFileNo >= 0");
+	return csvFileNo;
+}
+
+
+void log(string tingId, uint8 opcode, uint8 optype, uint16 value, int64 offset, int instrIndex, uint32 instructionCount) {
+	// workaround the bug in the 010Editor (current file position being reset to to zero, thus overwriting the previously written content)
+	FileSelect(logFile);
+	FSeek(FileSize());
+	FPrintf(logFile, csvRowFormat, bookId, tingId, opcode, optype, operation(opcode), operandType(optype), value, offset, instrIndex, instructionCount);
+	FPrintf(logFile, "\n");
+	FileSave();
+}
+
+
+void opcodePredicate(string tingId, int j, uint32 instructionCount) {
+	Assert(exists(oufScript), "exists(oufScript)");
+
+	local string s;
+	local uint8 opcode = oufScript.cmd[j].opcode.code;
+	local uint8 optype;
+	local int64 offset = startof(oufScript.cmd[j]);
+	switch(opcode) {
+	case END:
+		if(j < instructionCount - 2 && oufScript.cmd[j+1].opcode.code != END) {
+			log(tingId, opcode, 0, instructionCount - j - 1, offset, j, instructionCount);
+		}
+		break;
+	case CLEARVER:
+		break;
+	case SET:
+	case CMP:
+	case AND:
+	case OR:
+	case ADD:
+	case SUB:
+		break;
+	case 0x07:
+	case 0x11:
+	case 0x12:
+	case 0x13:
+	case 0x18:
+	case 0x19:
+		optype = oufScript.cmd[j].opcode.type;
+		log(tingId, opcode, optype, 0, offset, j, instructionCount);
+		break;
+	case JMP:
+	case JE:
+	case JNE:
+	case JG:
+	case JGE:
+	case JB:
+	case JBE:
+		optype = oufScript.cmd[j].opcode.type;
+		if(optype != OPERAND_NONE) {
+			log(tingId, opcode, optype, oufScript.cmd[j].op1, offset, j, instructionCount);
+		}
+		break;
+	case RETURN:
+		optype = oufScript.cmd[j].opcode.type;
+		if(optype != OPERAND_NONE || (j < instructionCount - 2)) {
+			log(tingId, opcode, optype, 0, offset, j, instructionCount);
+		}
+		break;
+	case NOT: {
+		optype = oufScript.cmd[j].opcode.type;
+		if(oufScript.cmd[j].op2 != 0) {
+			log(tingId, opcode, optype, oufScript.cmd[j].op2, offset, j, instructionCount);
+		}
+		break;
+	}
+	case CALLID:
+		optype = oufScript.cmd[j].opcode.type;
+		log(tingId, opcode, optype, oufScript.cmd[j].op1, offset, j, instructionCount);
+		break;
+	case PLAYOID:
+		optype = oufScript.cmd[j].opcode.type;
+		if(optype == OPERAND_NONE) {
+			log(tingId, opcode, optype, oufScript.cmd[j].op1, offset, j, instructionCount);
+		}
+		break;
+	case PAUSE:
+		optype = oufScript.cmd[j].opcode.type;
+		if(optype == OPERAND_NONE) {
+			log(tingId, opcode, optype, oufScript.cmd[j].op1, offset, j, instructionCount);
+		}
+		break;
+	default:
+		Assert(0, SPrintf(s, "Unknown script opcode %02X", opcode));
+		break;
+	}
+}
+
+
+void runPredicate(string tingId) {
+	Assert(exists(oufScript), "exists(oufScript)");
+	local uint32 j; 
+	local uint32 instructionCount; 
+
+	for(instructionCount=0; exists(oufScript.cmd[instructionCount]); instructionCount++) {
+	}
+	for(j=0; exists(oufScript.cmd[j]); j++) {
+		opcodePredicate(tingId, j, instructionCount);
+	}
+}
+
+
+void parseScriptFile(string scriptFilePath) {
+	// run s.bt binary template on the file
+	local int currentFileNo = FileOpen(scriptFilePath, /*runTemplate=*/1);
+	local int64 filesize = FileSize();
+	local string tingId = getBookId(GetFileName());
+	FileSelect(currentFileNo);
+	runPredicate(tingId);
+	FileSelect(currentFileNo);
+	FileClose();
+}
+
+
+uint32 parseBook(string bookId) {
+	local string bookFolder = getBookFolder(bookId);
+	Printf("Gathering list of tingIds from %s\n", bookFolder);
+	local TFileList tingIds = FindFiles(bookFolder, "*.s" );
+	local string filename;
+	local string tingId;
+	local uint32 i; 
+	
+	Printf("About to parse %d tingIds (scripts)\n", tingIds.filecount);
+	// Limit the script count per OUF file to workoaround the 010Editor limitations.
+	for(i=0; i < tingIds.filecount && i < SCRIPT_COUNT_LIMIT; i++) {
+		filename = tingIds.file[i].filename;
+	    Printf(" %s\n", filename);
+	    tingId = getBookId(filename);
+	    parseScriptFile(bookFolder + filename);
+	}
+
+	if(tingIds.filecount > 0) {
+		++processedBooks;
+	}
+	return i;
+}
+
+
+uint32 main() {
+	local int argCount = GetNumArgs();
+	local int i;
+	//local string bookId;
+
+	logFile = openLog();
+	for(i=0; i < argCount; ++i) {
+		bookId = GetArg(i);
+		parseBook(bookId);
+	}
+	return processedBooks;
+}
+
+
+main();
+
+
+/*
+*/
+

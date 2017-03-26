@@ -1,0 +1,70 @@
+%!PS
+% $Id: resource.html,v 1.18 2009/12/05 02:24:26 chap Exp $
+
+% Copyright Chapman Flack, www.anastigmatix.net. May be freely used and
+% distributed provided this notice remains intact. Provided in the hope
+% that it will be useful but AS-IS WITHOUT ANY EXPRESS OR IMPLIED WARRANTY
+% AND WITHOUT REPRESENTATION AS TO ITS SUITABILITY FOR ANY PURPOSE. 
+
+% A .gs and not a .ps file - depends on ==only which is a ghostscript extra.
+%
+% Prepend to any Level2 file created by anastigmatix-binwrite.gs and feed to
+% ghostscript to see the contents of the file.  For example, could say:
+%  cat anastigmatix-bindump.ps somefile.ps | gsnd -q -
+%
+% Some files may have additional layers of encoding, such as for compression.
+% In that case, what you will see unpacked is probably a short string for
+% setting up a decode filter, followed by gibberish and/or an error. If so:
+% 1. Count the number of times the word 'exec' appears in the unpacked string.
+% 2. Repeat the command above, but add -sExtraExecs=n after 'gsnd', where n is
+%    the number of execs you counted.
+% 3. Repeat as needed (adding to the value of ExtraExecs) until you see the main
+%    layer unpacked.
+
+/buf ( ) def
+/1st //true def
+/decode {
+  1st { /1st //false store buf } { inf buf readstring pop } ifelse
+} bind def
+
+/readit { % toktyp *readit* token
+  buf 0 3 -1 roll put /1st //true store //decode 0 () /SubFileDecode filter
+  token pop
+} bind def
+
+/ptypes <<
+  /booleantype { { (//true) } { (//false) } ifelse print } bind
+>> def
+
+/printit {
+  ptypes 1 index type 2 copy known { get exec } { pop pop ==only } ifelse
+} bind def
+
+{
+  << /exec
+     { % file
+       cvlit /inf exch def
+       /ouf (%stdout) (w) file def
+       {
+	 inf read not { exit } if
+	 dup 128 ge 1 index 160 lt and {
+           ( ) print dup readit printit ( % ) print =
+	 } {
+           ouf exch write
+	 } ifelse
+       } loop inf closefile ouf flushfile end
+     }
+     /findresource
+     {
+       {findresource cleardictstack} aload pop
+       countdictstack array dictstack dup length 3 sub 3 exch getinterval
+       cleardictstack
+       {begin}
+       {forall} 0 get
+       5 array astore cvx executeonly exec
+     }
+  >> begin
+  /ExtraExecs dup where { exch get cvi } { pop 0 } ifelse
+  [ << /exec { end exec } >> {begin} 0 get ] cvx repeat
+} bind % this bind is sort of crucial :)
+exec

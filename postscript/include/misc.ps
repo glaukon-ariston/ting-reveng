@@ -1,0 +1,747 @@
+%!PS-Adobe-3.0
+%%Title: misc.ps
+%%BoundingBox: 0 0 597 842
+%%Creator: Glaukon Ariston
+%%Copyright: Glaukon Ariston. All Rights Reserved
+%%Date: 10/05/2016
+%%LanguageLevel: 3
+%%EndComments
+
+%%BeginProlog
+
+/misc <<>> def
+misc begin
+
+
+%=====================================================================  dictionary
+
+
+/gdef { % key value -> -
+	1 index where { % key value dict
+		3 1 roll put % roll is ror (rotate to the right)
+	} { % key value 
+		def
+	} ifelse
+} bind def
+
+
+%\#= [args]: def args into the current dictionary
+/#= { % [names] -> -
+	reverse
+	{exch def} forall
+} bind def
+
+
+%\#== [args]: def args into the current dictionary
+% trace all the assignements when done
+/#== { % [names] -> -
+	dup dup length 2 add 1 roll	% 1..n [names] [names] n+2 1 roll
+	reverse
+	{exch def} forall
+	traceVars
+} bind def
+
+
+/#global { % [names] -> -
+	reverse
+	{exch gdef} forall
+} bind def
+
+
+%=====================================================================  array
+
+/#_ { % [an..a1] -> an..a1
+	aload pop
+} bind def
+
+
+/#x { % [x y] -> x
+	0 get
+} bind def
+
+
+/#y { % [x y] -> y
+	1 get
+} bind def
+
+
+/#width { % [x y width height] -> width
+	2 get
+} bind def
+
+
+/#height { % [x y width height] -> height
+	3 get
+} bind def
+
+
+/sum { % array -> sum
+	0 exch {add} forall
+} bind def
+
+
+/append { % array array -> array
+	[ 
+		3 1 roll 
+		exch
+		aload length
+		% [ array2 a_n .. a_1 n
+		1 add -1 roll
+		aload pop
+	]
+} bind def
+
+
+/elem { % array elem -> bool
+	false
+	3 1 roll 
+	exch
+	{	1 index 
+		eq {
+			exch pop
+			true exch
+			exit
+		} if
+	} forall
+	pop
+} bind def
+
+
+/mapGet {<<>>begin % [[key val]] key -> val true | false
+	exch
+	% key [[key val]]
+	false exch
+	% key false [[key val]]
+	{	aload pop exch 3 index eq 
+		{ true exit }
+		{ pop }
+			ifelse
+	} forall
+	% key false val
+	{ exch pop exch pop true }
+	% key
+	{ pop false }
+		ifelse
+end } def
+
+
+/reverse {<<>> begin	% array -> array
+	[ exch
+		2 2 1 roll
+		{ % mark .. index operand
+			exch dup 1 add 3 1 roll
+			% [ .. index elem
+			1 roll
+		} forall
+		pop
+	]
+end} bind def
+
+
+/minMax {<<>>begin % array -> min max
+	dup 0 get dup 
+	/lowMark exch def
+	/highMark exch def
+	{ 
+		dup lowMark lt { dup /lowMark exch def } if
+		dup highMark gt { dup /highMark exch def } if
+		pop
+	} forall
+	lowMark highMark % min max
+end} bind def
+
+
+/aforall {<<>>begin % [array1 array2 ... array_n] proc -> -
+	/proc exch def
+	/as exch def
+	% [ n 1 add 1 roll ] /as exch def
+	as length 0 gt {
+		as 0 get length /len exch def
+		/i 0 def
+		len {as {i get} forall 
+			proc
+			/i i 1 add def} repeat
+	} if
+end} bind def
+
+
+/a2forall {<<>>begin % array array proc -> array
+	/proc exch def
+	/a2 exch def
+	/i 0 def
+	{a2 i get proc /i i 1 add def} forall
+end} bind def
+
+
+% Error: /invalidaccess in --put--
+/__a2forall {<<>>begin % array array proc -> array
+	0 4 1 roll
+	{ % index array operand2
+		3 -1 roll
+		dup
+		1 add
+		% array operand2 index index+1
+		4 1 roll
+		2 index exch get
+		% index array operand2 operand1
+		exch
+		PROC exec
+		% index array result
+		3 1 roll
+	} dup 3 -1 roll 14 exch put
+	forall
+	pop
+	pop
+end} bind def
+
+
+% Error: /invalidaccess in --put--
+/__a2forall {<<>>begin % array array proc -> array
+	0 4 1 roll
+	/trampoline { % index array operand2
+		3 -1 roll
+		dup
+		1 add
+		% array operand2 index index+1
+		4 1 roll
+		2 index exch get
+		% index array operand2 operand1
+		exch
+		__DUMMY__ exec
+		% index array result
+		3 1 roll
+	} bind def 
+	/trampoline load dup 
+	3 -1 roll 
+		14 exch put
+	forall
+	pop
+	pop
+end} bind def
+
+
+/switch { % key [[value action]] -> -
+	{ % [value action]
+		aload pop	% key value action
+		exch	% key action value 
+		2 index	% key action value key
+		eq		% key action bool
+		exch	% key bool action 
+		{pop -| [exch] |- exit} metabind % key bool {pop action exit}
+		if		% key 
+	} forall
+} bind def
+
+
+%=====================================================================  string
+
+/makeString { % [int] -> string
+	dup length string
+	0
+	3 -1 roll
+	{ % newStr index int
+		3 copy put pop
+		1 add
+	} forall
+	pop
+} bind def
+
+
+/reverseStr {<<>> begin	% string -> string
+	dup length dup string
+	exch 1 sub
+	3 -1 roll
+	{ % newStr index int
+		3 copy put pop
+		1 sub 
+	} forall
+	pop
+end} bind def
+
+
+/stripAfterDot {<<>>begin % 	string -> string
+	(.) search {
+		% post match pre
+		3 1 roll
+		pop
+		pop
+	} if
+end} def
+
+
+/stripBeforeDot {<<>>begin % 	string -> string
+	(.) search {
+		% post match pre
+		pop
+		pop
+	} {
+		pop
+		()
+	} ifelse
+end} def
+
+
+/stripBeforeLastDot {<<>>begin % 	string -> string
+	reverseStr stripAfterDot reverseStr
+end} def
+
+
+/textSize {<<>>begin 		% string -> width height
+	gsave                                  % save graphic context
+		0 0 moveto                         % move to some point 
+		false charpath flattenpath pathbbox		% gets text path bounding box (LLx LLy URx URy)
+		3 1 roll sub					% LLx URx URy-LLy
+		3 -1 roll exch sub				% URy-LLy URx-LLx
+		exch
+	grestore                               % restore graphic context
+end} bind def
+
+
+/padLeft {<<>>begin 		% string padding n -> string
+	2 index length 
+	sub dup 0 gt
+	{	1 sub
+		% string padding n'
+		mark 4 1 roll 
+		{ dup } repeat 
+		counttomark -1 roll
+		] sconcat
+	} { pop
+		pop
+	} ifelse
+end} bind def
+
+
+/trimLeft {<<>>begin		% string whitespace -> string
+	[/str /whitespace]#=
+	false
+	0 1 str length 1 sub {
+		dup str exch 1 getinterval
+		whitespace exch search { % index post match pre
+			pop pop pop pop
+		} { % index string
+			pop 
+			/i exch def
+			pop true
+			exit
+		} ifelse
+	} for
+	{
+		str i dup str length exch sub getinterval	% substr(i, length-i)
+	} {()} ifelse
+end} bind def
+
+
+/leftTrim {
+	( \n\r\t) trimLeft
+} bind def
+
+
+/trimRight {<<>>begin		% string delimiters -> string
+	[/str /whitespace]#=
+	false
+	0 1 str length 1 sub {
+		dup str exch 1 getinterval
+		whitespace exch search { % index post match pre
+			pop pop pop pop
+		} { % index string
+			pop 
+			/i exch def
+			pop true
+			exit
+		} ifelse
+	} for
+	{
+		str 0 i 1 add getinterval	% substr(0, i+1)
+	} {()} ifelse
+end} bind def
+
+
+/spliceWords {<<>>begin		% string delimiters -> [words]
+	[/sentence /delimiters]#=
+	/left 0 def
+	/right 0 def
+	/result [] def
+	/limit sentence length 1 sub def
+	{
+		% skip delimiters (find the beginning of a word)
+		false
+		right 1 limit {
+			dup sentence exch 1 getinterval
+			delimiters exch search { % index post match pre
+				pop pop pop pop
+			} { % index string
+				pop 
+				/left exch def
+				pop true 
+				exit
+			} ifelse
+		} for
+		not {exit} if	% exit the loop if we reached the end of the sentence
+		
+		% skip non-delimiters (find the end of the word)
+		false
+		left 1 add 1 limit {
+			dup sentence exch 1 getinterval
+			delimiters exch search { % index post match pre
+				pop pop pop
+				/right exch def
+				pop true
+				exit
+			} { % index string
+				pop pop
+			} ifelse
+		} for
+		not {/right limit 1 add def} if	% terminate the word if we reached the end of the sentence
+
+		% append the new word to the list
+		[ result aload pop
+			sentence left right left sub getinterval
+		] /result exch def
+	} loop
+	result
+end} bind def
+
+
+/sconcat { %  [(a) (b) ... (z)] --> (ab...z)  
+	0 1 index { length add } forall string     
+	0 3 2 roll      
+	{ 
+		3 copy putinterval
+		length add 
+	} forall pop  
+} bind def
+
+
+%=====================================================================  introspection
+
+/strfyProc { % proc -> string
+	load [ ({) 3 -1 roll 
+		{toStr ( )} forall 
+		pop
+		(}) ] sconcat
+} def
+
+
+/strfyArray { % array -> string
+	[ ([) 3 -1 roll 
+		{toStr ( )} forall
+		pop
+		(]) ] sconcat
+} def
+
+
+/strfyDict { % dict -> string
+	[ (<<\n) 3 -1 roll
+		{ [ (/) 4 2 roll
+			toStr
+			exch 
+			128 string cvs 
+			exch 
+			( ) 
+			exch
+			(\n) ] sconcat
+		} forall
+		(>>\n) ] sconcat
+} def
+
+
+/strfy { % any -> string
+	1024 string cvs
+} bind def
+
+
+/toStr { % any -> string
+	dup type exch () exch % type string any
+	[ 
+		[(arraytype) {
+			dup
+			dup xcheck {
+				strfyProc
+			} {
+				strfyArray
+			} ifelse
+		}]
+		[(nametype) {
+			dup
+			dup xcheck {
+				strfy %strfyProc
+			} {
+				strfy
+			} ifelse
+		}]
+		[(booleantype) {
+			dup
+			strfy
+		}]
+		[(nulltype) {
+			dup
+			strfy
+		}]
+		[(dicttype) {
+			dup
+			strfyDict
+		}]
+		[(operatortype) {
+			dup
+			strfy
+		}]
+		[(filetype) {
+			dup
+			strfy
+		}]
+		[(packedarraytype) {
+			dup
+			dup xcheck {
+				strfyProc
+			} {
+				strfyArray
+			} ifelse
+		}]
+		[(fonttype) {
+			dup
+			strfy
+		}]
+		[(realtype) {
+			dup
+			strfy
+		}]
+		[(gstatetype) {
+			dup
+			strfy
+		}]
+		[(savetype) {
+			dup
+			strfy
+		}]
+		[(integertype) {
+			dup
+			strfy
+		}]
+		[(stringtype) {
+			dup
+		}]
+		[(marktype) {
+			dup
+			strfy
+		}]
+	] 
+	{ aload pop % type string any key proc
+		exch 4 index eq 
+		% type string any proc bool 
+		{ exec 
+			% type string any string
+			[ exch 
+				% type string any [ string
+				4 -1 roll exch ] sconcat
+			exch
+			exit
+		} 
+		{pop} 
+		ifelse
+	} forall
+	% type string any
+	3 -1 roll pop pop
+} bind def
+
+
+/traceN {<<>>begin % n -> -
+	/n exch def
+	n copy [ n 1 add 1 roll ] % create an array from the top n elements
+	toStr print % trace out the generated array
+end} bind def
+
+
+/traceVars {<<>>begin % [names] -> _
+	{ /_name 128 string def
+		dup 
+		_name cvs % variable name to string
+		[ exch % start an array
+		(: )
+		] sconcat print
+		load == % variable value
+	} forall
+end} bind def
+
+
+/dictTrace {% dict -> _
+	(<<\n) print
+	{ exch 
+		(/) print
+		128 string cvs print
+		( ) print
+		dup type 128 string cvs print
+		( ) print
+		toStr print
+		(\n) print
+	} forall
+	(>>\n) print
+end} bind def
+
+
+/stackTrace {<<>>begin % i -> _
+	/i exch def
+	countdictstack 
+		dup array dictstack
+		exch 2 sub i sub get 
+	dictTrace
+end} bind def
+
+
+/assert {<<>>begin % bool -> _
+	not {
+		(# Assertion failed!\n) print
+		0 stackTrace
+		stop
+	} if
+end} def
+
+
+%=====================================================================  arithmetic, math, logic
+
+% Compare the two arguments based on their values, aka deep eq.
+/eqValue {<<>>begin % a b -> _
+	/arraytype { [ 3 1 roll ] {toStr} forall eq } def
+	/nametype {eq} def
+	/booleantype {eq} def
+	/nulltype {eq} def
+	/dicttype { [ 3 1 roll ] {toStr} forall eq } def
+	/operatortype {eq} def
+	/filetype {eq} def
+	/packedarraytype { [ 3 1 roll ] {toStr} forall eq } def
+	/fonttype {eq} def
+	/realtype {eq} def
+	/gstatetype {eq} def
+	/savetype {eq} def
+	/integertype {eq} def
+	/stringtype {eq} def
+	/marktype {eq} def
+	dup type exec
+end} def
+
+
+% n = floor(x/m)*m
+/multiple {% x m -> n
+	dup  
+	% x m m
+	3 1 roll 
+	% m x m
+	sub 
+	% m x'
+	1 index div floor cvi 
+	% m x''
+	mul
+} def
+
+
+% integer division rounded up
+/divUp {<<>>begin % x y -> Tx/yT
+	[/$x /$y ] #=
+	% ((x-1) `div` y) + 1
+	% x 1 sub y idiv 1 add
+	$x $y div ceiling cvi
+end} def
+
+
+%=====================================================================  layout
+
+
+% DANGER: this is not re-entrant => do not call it again from the $proc
+/tile {<<>>begin % x y areaW areaH tileW tileH proc -> _
+	[/$x /$y /$areaW /$areaH /$tileW /$tileH /$proc ] #=
+	0 
+	$tileH 
+	$areaH $tileH multiple {
+		[/$y']#=
+		0 
+		$tileW 
+		$areaW $tileW multiple {
+			[/$x']#=
+			$x $x' add $y $y' add $tileW $tileH 
+				$proc
+		} for
+	} for
+end} def
+
+
+/tileTL {<<>>begin % x y areaW areaH tileW tileH proc -> _
+	[/$x /$y /$areaW /$areaH /$tileW /$tileH /$proc ] #=
+	$areaH $tileH multiple 
+	$tileH neg  
+	0 {
+		[/$y']#=
+		0 
+		$tileW 
+		$areaW $tileW multiple {
+			[/$x']#=
+			$x $x' add $y $y' add $tileW $tileH 
+				$proc
+		} for
+	} for
+end} def
+
+
+% DANGER: this is not re-entrant => do not call it again from the $proc
+/tabulate {<<>>begin % x y areaW areaH cols rows proc -> _
+	[/$x /$y /$areaW /$areaH /$cols /$rows /$proc ] #=
+	$x $y 
+	$areaW $areaH 
+	$areaW $cols div 
+	$areaH $rows div
+	/$proc load 
+		tile
+end} def
+
+
+% DANGER: this is not re-entrant => do not call it again from the $proc
+/tabulateTL {<<>>begin % x y areaW areaH cols rows proc -> _
+	[/$x /$y /$areaW /$areaH /$cols /$rows /$proc ] #=
+	$x $y 
+	$areaW $areaH 
+	$areaW $cols div 
+	$areaH $rows div
+	/$proc load 
+		tileTL
+end} def
+
+
+/centerWithinBox {<<>>begin % [x y] box@[width height] patch@[width height] -> x y
+	[	[  4 2 roll {sub} a2forall] 
+		{2 div} forall
+	]
+	{add} a2forall
+end } def
+
+
+%=====================================================================  unit conversion
+
+/mm { 25.4 div 72 mul } bind def
+/inch { 72 mul } bind def
+/pt { 1 mul } bind def
+/um { mm 1000 div } bind def
+/pt2inch { 72 div } bind def
+/pt2mm { 72 div 25.4 mul } bind def
+/pt2um { pt2mm 1000 mul } bind def
+
+/A4 [210 mm  297 mm] def
+
+
+/setFontSize { % fontSize
+	currentfont /FontMatrix get 0 get	% fontSize currentFontSize
+	div % fontSize/currentFontSize
+	currentfont exch scalefont setfont 
+} bind def
+
+
+end	% misc
+
+%%EndProlog
+
+%%BeginSetup
+%%EndSetup
+
+%%BeginScript
+%%EndScript
+
+%%Trailer
+%%EOF

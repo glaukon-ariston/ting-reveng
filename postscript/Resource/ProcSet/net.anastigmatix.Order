@@ -1,0 +1,109 @@
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: Order: algorithms for sorting and order statistics
+%%DocumentSuppliedResources: procset net.anastigmatix.Order 0.1 11
+%%Version: 0.1 11
+%%Copyright: Chapman Flack - www.anastigmatix.net
+%%Creator: makeOrder 1.11 using AFPL Ghostscript 8.51 (2005-04-18)
+%%CreationDate: Sun Oct 15 19:03:27 EDT 2006
+%%LanguageLevel: 2
+%%VMlocation: global
+%%VMusage: 12662 10824
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset net.anastigmatix.Order 0.1 11 12662 10824
+% VMusage measured in Adobe PostScript(r) 3010.108 on a Phaser 750 (PowerPC)
+% Usage after vmreclaim: 10926
+
+% Copyright Chapman Flack, www.anastigmatix.net. May be freely used and
+% distributed without modification provided this notice remains intact.
+% Provided in the hope that it will be useful but AS-IS WITHOUT ANY EXPRESS
+% OR IMPLIED WARRANTY AND WITHOUT REPRESENTATION AS TO ITS SUITABILITY FOR
+% ANY PURPOSE. 
+
+% InsSortStack is deprecated. See InsSortStk. 
+
+%%BeginData:         80 ASCII Lines
+currentfile /ASCII85Decode filter cvx exec
+05b?C/n&X+F*),/D..O#GV2d4A7]d7:i^Ja;e:%nEb0<1F`Lu'F*(i4F`VnmFbg*^Ap][_P"0q
+`<.0p/LanQFOprODF`MM6DKKi+@r#drB8lm6F(KH4@:O(eDJ,-aN<,4"02QS'GscFfH\_`d)3S
+TYP')q1M#VmMP!+/J!.B3M!I^,2I?ITYOq*X201'Aj@<-WlARTUhBR>)^!KsFF5*C&:H]gRUFc
+nqOFc?Eb5^e!8",Qu?LQZe9!KmJH5(/4eL^'#EP%'4JP,Wea!g4Fa:j\@JN<#,,I?IQc!g4Fa!
+Jpc=%u:LS=GR!@=HZ=5#a/;G#a/;Q5DTH*!KpQJ5CJ]+L^8e<P)#3CP')q1P')q1P')29%[&V$
+8T&TJDfTquFDH5Z"Gd)7"-QcB!g3S2OuSV,L]rS8L]`fBL]NY>H]g@O=GR$A=GR-D=HYn)!0Ur
+@L]N[<L]NZoL]NY>M#WWnL]ET'I=%-"I?ITYP":aYP')298<S+DOq*X201g&&;f?\u;flGXCO;
+4.0/#n7F&R!tFAm9sP!=AX%[&V$8T&TJFDH5_!Jgo8!JgoB=GR*C!IKthP$!MBP$!MDP$!l3L]
+NZ%H]iN"H]gRUFbg*^WJCS<LQ):s5^eeqI?I-JL]W`AL]`e@L]NZoI?IQm5)96&!KoWpOq*X20
+6:rJ@:X_J3.$fPI?I0MOq*X206;2VDfTE9OuSUaP%'4JP,X9;L]DdX"Gm)@LQZnF3.6r\P')29
+ %[&V$8T&TJDfTrHL]ET%L]W`A0/#n7F&R0rP"CgZP$!l,P-6N[FE2)5B68E<AWf3'0/%BfFDl
+22P !>+PI=%+bP')29<IL#?Ou"acBl6XRG^FdaL]W_WL^0)FP!=;L!g6ZA!KpQ@#Ei2P5C81gL
+]N Z oP!4 ;W<0 DBPH  \_`d=    GR$A     =GR3F =HYmq    L]`J5P)#3CI=%,@P')29
+< IL$ 1Ou  S7" P$! ME P$! l3H\_c[!Kr 5$5(/Sn P')Q ^P$! -\L]W`AP%'4JOp$R@P!
+ +/J!g 6Z K @Y b# I4aW ?70    26.u9j r8hATDg 0Eb& loF>%ZC     DJ*NjBOt[hP"
+       Us &I ? IQ      VH\_`d) 2JHZ= HYmqL]W `AI= %,   @L]W`AI?ITYI=6HhOuS
+ 7!P$! -\ P#[  ;@ M#WW nH ]gRU 5CJ\d P')Q`L] W`pP ')q1 I?G)'1G;I:DG=Pa6Z$d
+ hH[CP MO r9&\ P$ !l3L ]ET    MH\_`d =GR!@=G R3F=H    Yn)!0Ur@L]`G6P)#2aI?
+IQmFa\Um!g6ZA!g6ZA#Ei2P5DT<&Ap]=9M#WWnP')2"P!5%OI?ITYP#[Z)L]`fBL^'#EP!=a&P
+ %K&s",Hu@LQXiLP#RTeL]W`AI=6nQP$!lVL]NYAL]ET$H\_`d=H[-L!0TKlP'&EPBl6XRGXH=
+e+D#S6DfTB&@rsAE@;]^h@q]F`CQ_>R5CJ\oH[CPMOr9&ZP$!l3L]ETMH\_`d=FGOZ5)99'=FH
+? 4I=6 NjH]  g@E!g     6Z6I? ITd" Gm)@ LO51JP!=AX8Wn4P"Gd,BLQZeCFa]D_Ou"a\
+B  l7  HUB l8 9R!KpQ J@Yb#I4 aShOB l7 HUBl5&)EcQ)=A8,Oq061K=B4YRdARfM=99MM
+f P  # R5 ;L]W `AL]E T2L]N;4 L]rrDP  %'4JP,Wea"HllC!KpQJ99M8j"-QcB#*N)O5DT
+< &Ap] =:      L]W`p I?IQmFc plqP":  B3L]W`pP')q1I?G)'1G;43DIcIMG^G5IP$!lV
+L ]ET$ HS 7j&D IcIUD BNM2Ec5 u/Bk) 6< Ea`iuARfCb@r%6#P!=AX</:O1!g6ZA!0U!2!
+J gc4" d2 uN@Y b&JWI 'F(P$!M @P$! l?Ou S7"P$!MEP$!l3L]ET7H\_f\!g8=eP#RTeP'
+)298;ID)!g8>%FcplqOq*X202ut+@q]e&Df'37AUB47P$!M@P$!M@P$!lVL]NZ@P,XU<L]ikYP
+')Q]P$!mHP"^Z8L]W`pP')Q\P!5%&I?G)'1G<fn@;pRL!g6ZK5)9?))3RXK"c*2BLQY;nG`m<"
+       Oq*X20.q2tH\`#l=GR$A=GR$A=>)=KG@>HR5CJ\)Ou"af@<-I(FD5Z2H[C0fH[V&BI=
+ !V#/o WM     -5^     e!B      5*     C%A0.q2tP!FGBP!5$oI=$Bus+guE=H[-?H\_
+ ]cWJC nE =GR! @= HZ=5 $B eMI$BeM S5DT N,!KpQJ5CJ]+L]`J5P)"C?!KmJ>$^+VJ!Kp
+ QJ98E t= =GR? J= HYn) "H     ieK =HYm sP%BFNP$!MAP$!lDP!45U5*A0ZP#[Z/I?J/
+ t$A\b HL     PQ4 _P') 29 K89Pk!A     ?**EbT#sDffo7BmO?R5CJ\)Ou&'u+EM+9E+*
+ 6lBl7 Q: /or ^nL ]`fB P% '4YP$r^ #Fc nqOFY>C>DKA`pEcdI/P')2"L]iP6P)#2[L]E
+       T2 L]N; 7P     $!M      BP $!l, P%'4JP,XU;0/#n7F&R0rP!=a*P$!l,P%'4K
+P#@H90/#n7F&R0rP!>+PP')q1P!5%OL]`fB0/$.1Ecc#;Bl@mP5DTN"s,r.n!KpQJ@Yb)K)3ST
+YP')QbL]W`pP')q1OuSUhI=%-VP!5%OL]NZ@P%'4KOr9EpH]iN7Fcpm1Fcpm1Fa\V"WKKH.Fbg
+0V!g8>%30H   LSP#Zpn<IL$1I? G)'1G:A%0me]XP$ !M?P!+/ TFbg*^=HYj$01KYnA5-cUP
+! >+P0 /% Bj@ ;qAoI=$bOP$!  MCP$!lVL]N[<P&  2j*/or  ^nP')Q^P$!l20/#e/DIcIM
+G `k:S F Y>ChG @>HR5CJ\pI ? ITYOq*X202lFu A Rfh/H S 8</Ch7*u+D#S6DfTB&@rsA
+E @;]^ h @q]F` CQ_>R5CJ=hP$ !M?P$r^#5CJ\oL] `fBP%'4 LP$!lZH]gUAP#RTeP!4[&P
+, XU.L ] W`AP! 4['   P$!l20 /"r!0p4MZ5E\!^! KmI:02u t+@q]e&Df'37AWf9+Oq*X2
+02 lF uAR fgX Eb'N   [Fcn_? !KsFF4teQgEbT#s Dffo7Bm O?R5CJ\)Ou"aDD_QO$30Ia
+,s,  mnU3/   @Tu!A   ?**E     bT#sDffo7Bm     O?R     5E\3d"Gm)@LPPto=GQs?
+98Eh9=GR3F=HYn35)93%98E_,s,r/#5)93%5*C/H",Qu?LPQ1k!g8>%5)9E+=H[-L!KmJHDNZu
+8!g6Z4Oo^@@L]NZoOuRlQ8Wn4ZFcn_IY:js=EbTE(FEqh:P!+.F06;2VDfTEP5CImA$[n1<L]W
+`AP!=a+M#NQmL]W`AP!=AX%[&V$/oNIkOuSV6OuS7!P#-LgFY>C#D_R>=I=%,:L]ET$H]iN7Fc
+plqH\_`dD(dOpD_QO$3/@Qt98EV3D(dOpD_QO$3/@Tu98EY4=H[-VD(dOpD_QO$5)9?)=>)=%B
+l6XRGXH=eP!=a)M#WWnOuSW.06;5UBl7R*H#R>X4aSh8F)uGAEb1CuI=%+bI?ITnFa]EQI?ITY
+P#Zpn<IL$1I?G)'1G;OEA7]d[FCB9*F*),+F*fPn/oNJ#"c*8DLQXWQ#)E;CLPQ"p=HYn3Fcpm
+1Fa]D_Ou&'t+EM+9E+*6lBl7Q:/o`RlL]W`AP%'4YP$r^#FY>C>DKA`pEcdI/P')2"L]`J5P)#
+2[L]ET2L]N;7P$!MBP$!l,P%'4JP,XU;0/#n7F&R0rP!=a*P$!l,P%'4KP#@H90/#n7F&R0rP!
+>+PP')q1P!5%OL]`fB0/$.1Ecc#;Bl@mP5E\3nFbg']=H[-L!KpQJ@Zk>MP!4;W</:X>=GR'B=
+HYY,5DTDt!Kr5$30HLSP#Zpn%[&V$;0?S_CK#.lFF/fEP$!l20/"qt0TnDY5CJ\)Ou"aDBJ=dr
+3/@d%=HZ:'P')2"L^0)FL]NZ@P"UrtL]`fBL^B5HP!=a&P#-L]"Gd,BLOG=bP')q1I?ITYOq*X
+201]Y_E+rp0H[CPNP$!M@P$!l?L]W_WL]`fBL]NYLL]NY>0/"qk0TnYV"-QcB!KmJ>!KmsH0.p
+olP!=a)P$!MAP$!l1H]iN7Fcpm1Fco"<P#R5AP$!MDM#WWnL]`J5P)#3FL]ilCL]NZ@L]`fBP'
+E-RP')29AUT^OOu"aXF_PZ&87c4KH\_]c=H[-V3/ITt%u:7LWJLS1!&#urARTOlApKP1I?G)'1
+G;:1@;o.`EccYa!KpQJ@YdjD@4s92F_P?$;f?\uHS7$=F_PZ&87c4KP!>*hL]N[<M#W83H\_ce
+=HYk(!&$!HG@>HR5DT?'WJCO-01]Y_E+rp0P!=AX8<S+YFa]EQI?G)'1G;:5F*)bb!KpQJY:j=
+)Eaa68H#R>X4aVtcP$!l,L]ilCP%'7IL]DdX!g4Fa99QJ3Bl8$(B4Z+*H#R>X4aW?7I=$bMP'E
+-LI?ITYP":aYP')29</:R<=GR'B=GR-D=F5i+P#s@j6>:=GEd:Sp@<,jkP!>+PL]W_WP"UT3Oo
+^_jL]NZ@L]`fBI?I0bFcpm1FcnqOFcnqOFa]D_Ou"aDFYJ0*Fa]D_Ou"aDFYG\"P$!MAP$!MAP
+$!llP!4[&Oo^_0I?G)'1G:A'0mf'IP')Qa0/"r#0K#"XI?G)'1G:A'14(Z-/p/j$0.qB%I?G)'
+1G:A'0OoHmFbg3a=GR$A=GR!@WJCV=)3RXK!KmJHG^Y_bOu"aDFYRBQP!5%OL]rrDL]W`AL]NZ
+`L^#Lc/p/j*P!=AX%[&V$/p/pZHS7$)FYI;Y0.qB%@ssLMOu"aDFYeB-5)96&=GR'B=GR6G=HY
+n)!KmSK99MMfOq*X20.qB(H]hKe!g6ZA!g6ZKG`k7H!KmJH5(/S(Ou"aDFZ"N/5*A-d"-QcB"-
+Qc7Oq*X2N<(/CATVm"@r#drB.kl[2LCU0P')q1P!5%OP!5%OP!5%OI?G)'1G;aGBlSK_3$<HUB
+Ot[hHS7$)FYYU'/p/t+!0V=T0.qB&H]gRUFcnqOFbg2S0.qB(P!=AN#Ei1B0.qB)P"@;[/p0(8
+5DT<&5*ATfH]gQG0.qB&@kTJfFYegRP&W-./p/pZH]gRUFcnqOFbg3a=GQs5!Kq\`"tqV^FYo7
+GI>A/l=>)<[FZ#=R0/"r#2Ng:f5)92p!g6ZK9S`e,!Kr4o!0TO/9ThSfP#Zpn%[&W2h]QuOFDt
+YuCM@[!HS836CjABbE%aq"DG=Pa026.u9jr96D/_-tBl7HUBl5RnBl7HU@<aFsDKA`pEcb6%CG
+/7sF&R!tFAm9i@r!_hDKA`uCG/7sF&R!tF>$I!Ecc#;Bl@lB;0?S_CK#.lF>$R(Ch7*u02lFuA
+RfgXEb$h!Eb&a%;flGiBleB1@rj:oARTOlApH$rF_PZ&87c4K01]Y_E)U[qF>$U6Bk(gpFDl#1
+H=\aNCi<`m06;2VDfTDBF*D&301'Aj@<-WlARTUhBJ3A'BlPdsBleBEOuSV6Ou8CdH]gRK!KpQ
+JA<K-)P"CfsOuSU6P%f9+1OYF=OrfcH05b?C/n&X+F*),/D..O#GV2d4A7]eE4tf`QDdu^WF<G
++*Anc-oEb0<1F`Lu'P'$~>
+ %$Id: anastigmatix-binwrite.gs,v 1.12 2006/10/11 03:22:00 chap Exp $
+%%EndData
+%%EndResource
+%%EndProlog
+%%EOF

@@ -1,0 +1,153 @@
+/*
+Date: 04.05.2016
+Author: Glaukon Ariston
+About: 
+	Disassemble binary scripts (extracted from Ting's OUF files).
+
+	http://www.ting-el-tangel.de/doku.php?id=skripte
+	http://www.ting.eu
+
+*/
+
+// DIRE WARNING: Make sure your 010Editor instance doesn't have an *.s file loaded
+// already or your will get error complaining the types from s-types.bt have already
+// been defined.
+// In other words, open 010Editor, close all documents. close the editor. Then, you
+// can run this script.
+#include "common.1sc"
+#include "s-types.bt"
+
+local uint32 SCRIPT_COUNT_LIMIT = 30000;
+local uint32 processedBooks = 0;
+
+
+//=================================================================== Statistics
+local int logFile;
+local string bookId;
+local string csvHeader = "bookId;script";
+local string csvRowFormat = "%s;%s";
+
+
+void persistHeader(int fileNo) {
+	// workaround the bug in the 010Editor (current file position being reset to to zero, thus overwriting the previously written content)
+	FileSelect(fileNo);
+	FSeek(FileSize());
+	FPrintf(fileNo, "%s", csvHeader);
+	FPrintf(fileNo, "\n");
+	FileSave();
+}
+
+
+int openLog() {
+	local string statsFolder = getStatsFolder();
+	if(!FileExists(statsFolder)) {
+		MakeDir(statsFolder);
+	}
+	local string filePath = statsFolder + "disasmScripts.csv";
+	local int fileNo = -1;
+	if(!FileExists(filePath)) {
+		fileNo = FileNew();
+		persistHeader(fileNo);
+		FileSave(filePath);
+	} else {
+		fileNo = FileOpen(filePath);
+	}
+	Assert(fileNo >= 0, "csvFileNo >= 0");
+	return fileNo;
+}
+
+
+void log(string tingId) {
+	// workaround the bug in the 010Editor (current file position being reset to to zero, thus overwriting the previously written content)
+	FileSelect(logFile);
+	FSeek(FileSize());
+	FPrintf(logFile, csvRowFormat, bookId, tingId);
+	FPrintf(logFile, "\n");
+	FileSave();
+}
+
+
+void disassembleScript(string tingId) {
+	Assert(exists(oufScript), "exists(oufScript)");
+	local string disassembly = getDisassembly(bookId, tingId);
+
+	local string bookFolder = getBookFolder(bookId);
+	/*
+	local string srcFilePath = bookFolder + tingId + ".src";
+	if(FileExists(srcFilePath)) {
+		DeleteFile(srcFilePath);
+	}
+	*/
+	local string dasmFilePath = bookFolder + tingId + ".d";
+	local int fileNo = FileNew();
+	FileSelect(fileNo);
+	FPrintf(fileNo, "%s", disassembly);
+	FileSave(dasmFilePath);
+	FileClose();
+}
+
+
+void parseScriptFile(string scriptFilePath) {
+	log(scriptFilePath);
+	// run s.bt binary template on the file
+	local int currentFileNo = FileOpen(scriptFilePath, /*runTemplate=*/1);
+	local int64 filesize = FileSize();
+	local string tingId = getBookId(GetFileName());
+	FileSelect(currentFileNo);
+	disassembleScript(tingId);
+	FileSelect(currentFileNo);
+	FileClose();
+}
+
+
+uint32 parseBook(string bookId) {
+	local string bookFolder = getBookFolder(bookId);
+	Printf("Gathering list of tingIds from %s\n", bookFolder);
+	local TFileList tingIds = FindFiles(bookFolder, "*.s" );
+	local string filename;
+	local string tingId;
+	local uint32 i; 
+	local string dasmFilePath;
+	
+	Printf("About to parse %d tingIds (scripts)\n", tingIds.filecount);
+	// Limit the script count per OUF file to workoaround the 010Editor limitations.
+	for(i=0; i < tingIds.filecount && i < SCRIPT_COUNT_LIMIT; i++) {
+		filename = tingIds.file[i].filename;
+	    Printf(" %s\n", filename);
+	    tingId = getBookId(filename);
+		dasmFilePath = bookFolder + tingId + ".d";
+		if(!FileExists(dasmFilePath)) {
+	    	parseScriptFile(bookFolder + filename);
+	    }
+	}
+
+	if(tingIds.filecount > 0) {
+		++processedBooks;
+	}
+	return i;
+}
+
+
+uint32 main() {
+	local int argCount = GetNumArgs();
+	local int i;
+
+	logFile = openLog();
+	for(i=0; i < argCount; ++i) {
+		bookId = GetArg(i);
+		parseBook(bookId);
+	}
+	return processedBooks;
+}
+
+
+/*
+bookId = "00015";
+parseBook(bookId);
+*/
+main();
+
+
+/*
+*/
+

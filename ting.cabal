@@ -1,0 +1,67 @@
+name:                ting
+version:             0.1.0.0
+synopsis:            Ting pen development framework as an eDSL in Haskell
+description:         Ting pen development framework as an eDSL in Haskell
+homepage:            https://github.com/glaukon-ariston/ting-reveng#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Glaukon Ariston
+maintainer:          glaukon_ariston(at)gmail_com
+copyright:           2016 Glaukon Ariston
+category:            Web
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Ting.Assembler2, Ting.Emulator, Ting.Instructions, Ting.Linker, Ting.Operand, Ting.Registers, Ting.Repl, Ting.Test, Ting.Common
+  other-modules:       Ting.Assembler
+  build-depends:       base >= 4.7 && < 5
+                     , split, cryptonite, filepath, directory, bytestring, mtl, containers, vector, time, binary
+                     -- , template-haskell, split, vector, cryptonite, filepath, directory, time, binary, MissingH, mtl, bytestring, containers
+  default-language:    Haskell2010
+
+executable ting-calc
+  hs-source-dirs:      apps/calculator
+  main-is:             Main.hs
+  other-modules:       
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , ting
+  default-language:    Haskell2010
+
+executable ting-emu
+  hs-source-dirs:      apps/generic
+  main-is:             Main.hs
+  other-modules:       
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  -- ghc-options:         -threaded
+  --   -Wall 
+  -- -Wincomplete-patterns -Wincomplete-record-updates 
+  --  -fwarn-incomplete-patterns -fwarn-incomplete-record-updates
+  --  -O2
+  --  -fprof-auto
+  --  -rtsopts 
+  --  -- -with-rtsopts=-N
+  --  -- "-with-rtsopts=-M128M -s -h -p -i0.1"
+  --  "-with-rtsopts=-M128M -s -h -i0.1"
+  --  -- -fforce-recomp
+  --  -- -ddump-simpl -dsuppress-all -p
+  build-depends:       base
+                     , ting
+  default-language:    Haskell2010
+
+test-suite ting-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  other-modules:       
+  build-depends:       base
+                     , ting
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/glaukon-ariston/ting-reveng

@@ -1,0 +1,5 @@
+-dNOPAUSE -dBATCH -sDEVICE#pdfwrite 
+-dCompatibilityLevel#1.4 
+-dOSTACKPRINT 
+-dESTACKPRINT 
+-sFONTPATH#"C:/Windows/Fonts" 

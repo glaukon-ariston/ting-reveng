@@ -1,0 +1,137 @@
+%!PS-Adobe-3.0
+%%Title: generateContactSheet.ps
+%%BoundingBox: 0 0 597 842
+%%DocumentPaperSizes: a4
+%%DocumentMedia: a4 595 842 0 () ()
+%%Orientation: Portrait
+%%Creator: Glaukon Ariston
+%%Copyright: Glaukon Ariston. All Rights Reserved
+%%Date: 10/05/2016
+%%LanguageLevel: 3
+%%EndComments
+
+% http://ghostscript.com/doc/9.20/Use.htm#Input_control
+% http://ghostscript.com/doc/9.20/Use.htm#Parameters
+%
+% gswin32c -fgenerateContactSheet.ps @ps2pdf-oid.opt
+% gswin32c -sOutputFile#oid.pdf -c ".setpdfwrite <</NeverEmbed [ ] /AlwaysEmbed [/Courier]>> setdistillerparams /tingId 1500 def" @ps2pdf-oid.opt
+
+
+
+%%BeginProlog
+
+(include/misc.ps) run
+(include/tingOid.ps) run
+
+%%EndProlog
+
+
+
+%%BeginSetup
+
+misc begin
+tingOid begin
+
+/DEBUG false def
+/outlineRect { % x y w h lineWidth
+	DEBUG {
+		% draw an outline
+		gsave 
+			0.8 setgray	% debugGray
+			setlinewidth
+			rectstroke
+		grestore
+	} if
+} def
+
+
+/PageSize [
+	210 mm %width
+	297 mm %height
+] def
+
+/A4Margins [
+	10 mm %left
+	10 mm %top
+	 0 mm %right
+	10 mm %bottom
+] def
+
+/Label37x70mmMargins [
+	0 mm %left
+	0 mm %top
+	0 mm %right
+	0 mm %bottom
+] def
+
+
+/FontSize 5 def
+/LineHeight 1.5 FontSize mul def
+/Arial findfont FontSize scalefont setfont
+LineHeight [/labelHeight ]#==
+
+% Collect definitions passed through the command line, e.g.
+% -c "/LabelMargins [ 10 mm 10 mm 0 mm 10 mm] def /LabelSize [35 mm 37 mm] def"
+/defaultLabelMargins [
+	0 mm %left
+	0 mm %top
+	0 mm %right
+	0 mm %bottom
+] def
+/LabelMargins dup dup where 
+	{ exch get cvx def
+	} { 
+		pop defaultLabelMargins def
+	} ifelse
+/Margins LabelMargins def
+
+/defaultLabelSize [35 mm 37 mm] def
+/LabelSize dup dup where 
+	{ exch get cvx def
+	} { 
+		pop defaultLabelSize def
+	} ifelse
+[LabelWidth mm LabelHeight mm] [/oidPatch ]#==
+% [35 mm 37 mm labelHeight sub] [/oidPatch ]#==
+% [35 mm 37 mm] [/oidPatch ]#==
+% [10 mm 10 mm] [/oidPatch ]#==
+
+oidPatch aload pop pop 4 div [/xLabelOffset ]#==
+oidPatch aload pop exch pop 2 div [/yLabelOffset ]#==
+
+
+/DPI 1200 def
+
+%%EndSetup
+
+
+
+%%BeginScript
+
+/generateContactSheet {<<>>begin % startTingId -> _
+	[/startTingId ]#==
+	(include/map_tingId_oid.ps) run
+
+	testTingOidGeneration
+	DPI 2 /squareDot defineConstants
+	% DPI 2 /roundDot defineConstants
+	startTingId seqGen
+	% 0 midGen 
+		drawContactSheet 0 get [/lastIndex ] #= showpage
+	pop
+	[(lastIndex ) lastIndex toStr] sconcat print
+	%0 stackTrace
+end } def
+
+
+/main {
+	startTingId generateContactSheet
+} exec
+
+
+end % tingOid
+end % misc
+%%EndScript
+
+%%Trailer
+%%EOF

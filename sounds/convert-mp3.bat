@@ -1,0 +1,1 @@
+FOR /F "tokens=*" %%G IN ('dir /b *.wav') DO ffmpeg -i "%%G" -codec:a libmp3lame -qscale:a 6 "%%~nG.mp3"

@@ -1,0 +1,412 @@
+/net.anastigmatix.Markup/ProcSet resourcestatus{ pop % 146
+ 2 % 136
+ lt % 146
+{ currentfile % 146
+ flushfile % 146
+} if % 146
+} if % 146
+/net.anastigmatix.MetaPre/ProcSet findresource % 146
+ begin % 146
+currentpacking //true % 141
+setpacking 11 % 136
+ dict % 146
+ begin % 146
+/.b (\\) % 142
+readonly def % 146
+/.I matrix % 146
+readonly def % 146
+/glyphwidth{ gsave % 146
+nulldevice 0 % 136
+ 0 % 136
+ moveto % 146
+glyphshow currentpoint % 146
+ grestore % 146
+} bind % 146
+ def % 146
+/.ne{//systemdict/$error get % 146
+/newerror} bind % 146
+ def % 146
+/.mn (\\markup) % 142
+ cvn % 146
+ def % 146
+//.mn{ dup % 146
+{{/SourceFile currentfile % 146
+}{/EODCount 0 % 136
+}{/EODString (\\) % 142
+}}{ exec % 146
+ 3 % 136
+ copy % 146
+ pop % 146
+ known % 146
+{ pop % 146
+ pop % 146
+}{ put % 146
+ dup % 146
+} ifelse % 146
+} forall % 146
+ pop % 146
+ begin % 146
+{-| [ currentdict % 146
+] |-/SourceFile get % 146
+ dup % 146
+status{ dup % 146
+}{ () % 142
+} ifelse % 146
+-| [ currentdict % 146
+] |-/EODCount get % 146
+-| [ currentdict % 146
+] |-/EODString get % 146
+/SubFileDecode filter % 146
+{ dup % 146
+-1| [/LineBuffer load % 146
+] |- exec % 146
+ readline % 146
+ not % 146
+{ exit % 146
+} if % 146
+ dup % 146
+ () % 142
+ ne % 146
+{-2| [/FullLine load % 146
+] |-}{ -2| [/BareLine load % 146
+] |-} ifelse % 146
+ 3 % 136
+ 1 % 136
+//hvhide+ap exec % 146
+} loop % 146
+-| [/PartLine load % 146
+] |- 3 % 136
+ 1 % 136
+//hvhide+ap exec % 146
+closefile token % 146
+ not % 146
+{-1| [ currentdict % 146
+] |-/EOFToken 2 % 136
+ copy % 146
+ known % 146
+{ get % 146
+}{ pop % 146
+ pop % 146
+ exit % 146
+} ifelse % 146
+} if % 146
+-| [/HandleToken load % 146
+] |- exec % 146
+-| [/HandleResult load % 146
+] |- exec % 146
+} end % 146
+{ loop % 146
+}//.ne exec % 146
+ //false % 141
+ put % 146
+ stopped % 146
+{//.ne exec % 146
+ get % 146
+{ stop % 146
+} if % 146
+} if % 146
+}metabind def % 146
+/includegen{{ -| [ 1 % 136
+ index % 146
+] |-/EOFToken{ -| 2 % 136
+ copy % 146
+ 2 % 136
+ copy % 146
+ known % 146
+{ 2 % 136
+ copy % 146
+ get % 146
+ 4 % 136
+{ put % 146
+}}{ 3 % 136
+{ undef % 146
+}} ifelse % 146
+ 0 % 136
+ get % 146
+ exch % 146
+ array % 146
+ astore % 146
+|- -| [ 2 % 136
+ index % 146
+/SourceFile 2 % 136
+ copy % 146
+ get % 146
+] |- put % 146
+} put % 146
+-| [ exch % 146
+] |-/SourceFile 3 % 136
+ -1 % 136
+ roll % 146
+ put % 146
+}}metabind def % 146
+/Dump <</FullLine{ =}/BareLine 1 % 136
+ index % 146
+/PartLine{ print % 146
+} bind % 146
+/HandleResult{//.b print % 146
+==} bind % 146
+/HandleToken{}/LineBuffer 192 % 134
+ string % 146
+>> readonly def % 146
+/sgs-path{//.I setmatrix % 146
+[{{ moveto % 146
+} 0 % 136
+ get % 146
+}{{ lineto % 146
+} 0 % 136
+ get % 146
+}{{ curveto % 146
+} 0 % 136
+ get % 146
+}{{ closepath % 146
+} 0 % 136
+ get % 146
+} pathforall % 146
+] cvx % 146
+ exch % 146
+ setgstate % 146
+ matrix % 146
+ currentmatrix % 146
+//.I setmatrix % 146
+ exch % 146
+ newpath % 146
+ exec % 146
+ setmatrix % 146
+} bind % 146
+ def % 146
+/gr-path{ -| [//sgs-path 0 % 136
+ 10 % 136
+ getinterval % 146
+] |- exec % 146
+ grestore % 146
+-| [//sgs-path 12 % 136
+ 8 % 136
+ getinterval % 146
+] |- exec % 146
+}metabind def % 146
+/Basic{ 20 % 136
+ dict % 146
+ begin % 146
+/LineBuffer -| [//Dump/LineBuffer get % 146
+] |- def % 146
+/Before matrix % 146
+ def % 146
+/After matrix % 146
+ def % 146
+{ dup % 146
+ -1.0 % 138
+ mul % 146
+ 0.0 % 138
+ dup % 146
+ 2 % 136
+ index % 146
+-| [ currentdict % 146
+] |-/Before get % 146
+ 0 % 136
+ 4 % 136
+ getinterval % 146
+ astore % 146
+ pop % 146
+ 1.0 % 138
+ sub % 146
+ 0.0 % 138
+ dup % 146
+ 2 % 136
+ index % 146
+-| [ currentdict % 146
+] |-/After get % 146
+ 0 % 136
+ 4 % 136
+ getinterval % 146
+ astore % 146
+ pop % 146
+}{ 0.0 % 138
+-| [ 1 % 136
+ index % 146
+] |- exec % 146
+}/RagRight exch % 146
+ def % 146
+{ 0.5 % 138
+-| [ 1 % 136
+ index % 146
+] |- exec % 146
+}/Center exch % 146
+ def % 146
+{ 1.0 % 138
+-| [ exch % 146
+] |- exec % 146
+}/RagLeft exch % 146
+ def % 146
+/Baselines{ -| [ currentdict % 146
+] |-/After get % 146
+ 5 % 136
+ 3 % 136
+ -1 % 136
+ roll % 146
+ neg % 146
+ put % 146
+} def % 146
+Baselines RagRight matrix % 146
+ 1 % 136
+ array % 146
+{ 0 % 136
+ 0 % 136
+-| [ 2 % 136
+ index % 146
+] |- transform % 146
+ idtransform % 146
+}/Width exch % 146
+ def % 146
+{ gstate % 146
+ null % 146
+ count % 146
+ array % 146
+ astore % 146
+ aload % 146
+ exch % 146
+ pop % 146
+ 3 % 136
+ -1 % 136
+ roll % 146
+nulldevice 0 % 136
+ 0 % 136
+ moveto % 146
+ 2 % 136
+{}//hide+k exec % 146
+ aload % 146
+ pop % 146
+ exch % 146
+ currentpoint % 146
+ 3 % 136
+ -1 % 136
+ roll % 146
+ setgstate % 146
+ 4 % 136
+ -1 % 136
+ roll % 146
+{ pop % 146
+ pop % 146
+ pop % 146
+$error/newerror get % 146
+{ stop % 146
+} if % 146
+}{ dtransform % 146
+-1| [ 2 % 136
+ index % 146
+] |- transform % 146
+-1| [ 2 % 136
+ index % 146
+] |- translate % 146
+ pop % 146
+ dup % 146
+ length % 146
+ 1 % 136
+ sub % 146
+-1| [ 1 % 136
+ index % 146
+] |- 2 % 136
+ index % 146
+//enq exec % 146
+ pop % 146
+ put % 146
+} ifelse % 146
+}/Track exch % 146
+ def % 146
+{-| [/Width load % 146
+] |- exec % 146
+ 3 % 136
+ -1 % 136
+ roll % 146
+ transform % 146
+ rmoveto % 146
+{-1| [ 1 % 136
+ index % 146
+] |-//deq exec % 146
+ not % 146
+{ exit % 146
+} if % 146
+ aload % 146
+ pop % 146
+//sgs-path exec % 146
+ exec % 146
+ clear % 146
+} count % 146
+{ loop % 146
+} exch % 146
+ 1 % 136
+//hvhide+ap exec % 146
+-| [/Width load % 146
+] |- exec % 146
+ 3 % 136
+ -1 % 136
+ roll % 146
+ transform % 146
+ rmoveto % 146
+ 0 % 136
+ 0 % 136
+-| [ 2 % 136
+ index % 146
+] |- translate % 146
+ pop % 146
+}/Place exch % 146
+ def % 146
+ pop % 146
+ pop % 146
+{ dup % 146
+ length % 146
+ string % 146
+ copy % 146
+{ show % 146
+}-| [/Track load % 146
+] |- exec % 146
+}/PartLine exch % 146
+ def % 146
+{-| [/PartLine load % 146
+] |- exec % 146
+-| [ currentdict % 146
+] |-/After get % 146
+-| [ currentdict % 146
+] |-/Before get % 146
+-| [/Place load % 146
+] |- exec % 146
+}/FullLine 1 % 136
+ index % 146
+ def % 146
+/BareLine exch % 146
+ def % 146
+/HandleToken{ exec % 146
+} def % 146
+<</stringtype/PartLine load % 146
+/nametype{{ glyphshow} -| [/Track load % 146
+] |- exec % 146
+}/filetype currentdict % 146
+//includegen exec % 146
+>>/ResultHandlers exch % 146
+ def % 146
+{ count % 146
+ 1 % 136
+ lt % 146
+{ //false % 141
+}{ dup % 146
+ type % 146
+-1|/ResultHandlers load % 146
+[ 1 % 136
+ index % 146
+] |- exch % 146
+ known % 146
+} ifelse % 146
+{ dup % 146
+ type % 146
+-1| [ exch % 146
+] |- exch % 146
+ get % 146
+ exec % 146
+} if % 146
+}/HandleResult exch % 146
+ def % 146
+ currentdict % 146
+ end % 146
+}metabind def % 146
+{//.mn/glyphwidth/sgs-path/gr-path/includegen/Dump/Basic} export/net.anastigmatix.Markup exch % 146
+/ProcSet defineresource pop % 146
+setpacking end % 146

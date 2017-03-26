@@ -1,0 +1,1 @@
+hp2ps -e8in -c ting-emu.hp

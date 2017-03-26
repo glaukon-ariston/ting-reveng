@@ -1,0 +1,43 @@
+%!PS-Adobe-3.0
+%%Title: mikula.ps
+%%BoundingBox: 0 0 597 842
+%%DocumentNeededResources: procset net.anastigmatix.Import 0.1 13
+%%+ procset net.anastigmatix.PNG 0.1 7
+%%Creator: bmazic@hotmail.com
+%%Copyright: (C) 2010 Boris Mazic. All Rights Reserved
+%%Date: 06/09/2010
+%%LanguageLevel: 3
+%%EndComments
+
+%%BeginProlog
+
+(Resource/ProcSet/net.anastigmatix.MetaPre) run
+(Resource/ProcSet/net.anastigmatix.StreamIO) run
+(Resource/ProcSet/net.anastigmatix.BinaryIO) run
+(Resource/ProcSet/net.anastigmatix.PNG) run
+(Resource/Category/net.anastigmatix.filter) run
+%(Resource/net.anastigmatix.filter/FlateDecode) run
+%(Resource/net.anastigmatix.filter/DSCDecode) run
+%(Resource/net.anastigmatix.filter/DSCDataEncode) run
+%(Resource/net.anastigmatix.filter/InUPathDecode) run
+%(Resource/net.anastigmatix.filter/WSMarkEncode) run
+(Resource/ProcSet/net.anastigmatix.Import) run
+
+%%EndProlog
+
+%%BeginSetup
+
+/net.anastigmatix.Import /ProcSet findresource begin
+%/net.anastigmatix.PNG    /ProcSet findresource begin
+userdict begin
+
+%%EndSetup
+
+%%BeginScript
+% Now an example of JPEG import. Place a JFIF at 356,500 in its natural size:
+{ gsave StatJFIF pop ReadyJFIF pop pop 356 500 translate ExecJPEG grestore }
+(images/eos400d-3160_saveas.jpg) (r) file exch exec
+%%EndScript
+
+showpage
+%%EOF
