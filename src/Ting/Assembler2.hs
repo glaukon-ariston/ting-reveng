@@ -149,12 +149,13 @@ resolveSound sound = Assembler . rws $ go
 
 {- Assemble the program, by generating the machine code and fixing the referenced locations. 
 Also generates the tingId(s) and fixes them in the call site. -}
-asm :: Int -> Program Assembler () -> SoundLib -> [[Instruction]]
-asm tingIdBase program soundLib = map go program
+asm :: Bool -> Int -> Program Assembler () -> SoundLib -> [[Instruction]]
+asm naked tingIdBase program soundLib = map (go naked) program
     where
-        go (_, snippetType, snippet) = 
+        go False (_, snippetType, snippet) = 
             let (Assembler snippet') = appendEpilogue snippetType . prependProlog snippetType $ snippet 
             in F.toList . snd . execRWS snippet' env $ 0
+        go True (_, _, (Assembler snippet)) = F.toList . snd . execRWS snippet env $ 0
         prependProlog SubroutineX snippet = snippet
         prependProlog _ snippet = mdo
             skip (cmp rsp 0 >>. jne) $ mdo

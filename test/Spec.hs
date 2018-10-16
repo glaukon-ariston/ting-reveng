@@ -16,7 +16,9 @@ http://wall.org/~lewis/2013/10/15/asm-monad.html
 
 module Main where
 
-import Prelude hiding (and, or, not, return)
+import Prelude hiding (and, or, not, return, putStr, putStrLn)
+import IOUtil (putStr, putStrLn)
+
 import Control.Monad.Fix (MonadFix(..))
 
 import Ting.Instructions

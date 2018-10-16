@@ -598,7 +598,8 @@ initialState bookId tingIdBase program soundLib = Context
     , _execResult = []
     }
     where
-        assemblage = asm tingIdBase program soundLib
+        assemblage = asm naked tingIdBase program soundLib
+        naked = False
 
 callStack :: Emulator [String]
 callStack = get >>= \case 

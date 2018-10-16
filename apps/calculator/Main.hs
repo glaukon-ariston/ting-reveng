@@ -12,7 +12,9 @@ Abstract:
 
 module Main where
 
-import Prelude hiding (and, or, not, return)
+import Prelude hiding (and, or, not, return, getContents, putStr, putStrLn)
+import IOUtil (putStr, putStrLn)
+
 import Control.Monad.Fix (MonadFix(..))
 import Data.List (findIndex)
 import Data.Word (Word16)
@@ -310,8 +312,9 @@ program = map prependPrefix $
 
 saveBook :: IO ()
 saveBook = do
-    makeBook bookId bookDesc tingBaseId (program++prelude) (soundLib++preludeSoundLib) "books"
+    makeBook naked bookId bookDesc tingBaseId (program++prelude) (soundLib++preludeSoundLib) "books"
     uploadBook bookId "books"
+    where naked = False
 
 evalBook :: IO ()
 evalBook = repl bookId tingBaseId (program++prelude) (soundLib++preludeSoundLib)

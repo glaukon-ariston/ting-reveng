@@ -35,7 +35,10 @@ ghci Debugging
 
 module Ting.Linker where
 
-import Prelude hiding (and, or, not, divMod)
+import Prelude hiding (and, or, not, divMod, putStr, putStrLn)
+import IOUtil (putStr, putStrLn)
+
+import System.IO (Handle, IOMode(WriteMode), withBinaryFile)
 
 import Data.Word (Word8, Word16,Word32)
 import Data.Bits ((.&.), (.|.), shiftR, shiftL, complement)
@@ -49,6 +52,10 @@ import System.FilePath ((</>))
 import Crypto.Hash (Digest, MD5, hashlazy)
 
 import qualified Data.ByteString.Lazy as B
+import Data.Text.Lazy (Text)
+import qualified Data.Text.Lazy as T (pack)
+import qualified Data.Text.Lazy.Encoding as T (encodeUtf8)
+
 import qualified Data.Binary.Builder as Br
 import Control.Monad.Writer.Lazy
 import Control.Monad.State.Lazy
@@ -240,14 +247,14 @@ linkBS bookID tingIdBase program soundLib timestamp = mdo
     oufResources program
     oufResources soundLib
 
-link :: Int -> Int -> Program Assembler () -> SoundLib -> FilePath -> IO ()
-link bookID tingIdBase program soundLib filepath = mdo
-    printf "Linking %s (bookID %d, tingIdBase %d) ...\n" filepath bookID tingIdBase
+link :: Bool -> Int -> Int -> Program Assembler () -> SoundLib -> FilePath -> IO ()
+link naked bookID tingIdBase program soundLib filepath = mdo
+    putStr $ printf "Linking %s (bookID %d, tingIdBase %d) ...\n" filepath bookID tingIdBase
     timestamp <- round `fmap` getPOSIXTime
-    let procedures = asm tingIdBase program soundLib
-    printf "\tAssembled actions #%d\n" $ length procedures 
+    let procedures = asm naked tingIdBase program soundLib
+    putStr $ printf "\tAssembled actions #%d\n" $ length procedures 
     sounds <- mapM loadSound soundLib
-    printf "\tSounds #%d\n" $ length sounds 
+    putStr $ printf "\tSounds #%d\n" $ length sounds 
     let oufData = runSPut $ linkBS bookID tingIdBase procedures sounds timestamp
     B.writeFile filepath oufData
     where
@@ -261,6 +268,9 @@ md5sum filepath = do
     xs <- B.readFile filepath
     let md5Digest = md5 xs
     return $ show md5Digest
+
+putUtf8Str :: String -> Handle -> IO ()
+putUtf8Str s h = B.hPut h . T.encodeUtf8 . T.pack $ s
 
 makeDescription ::BookDescription -> FilePath -> IO ()
 makeDescription (BookDescription {..}) descFile = do
@@ -276,24 +286,26 @@ makeDescription (BookDescription {..}) descFile = do
             , "FileMD5: " ++ fileMD5
             , "ScriptMD5: "
             , "Book Area Code: en" ]
-    printf "Book description:\n%s\n" . intercalate "\n" . map ("    " ++) $ description
-    writeFile descFile $ intercalate "\n" description
+    putStr $ printf "Book description:\n%s\n" . intercalate "\n" . map ("    " ++) $ description
+    withBinaryFile descFile WriteMode . putUtf8Str
+        $ intercalate "\n" $ description
 
 makeMap :: Int -> Program Assembler () -> SoundLib -> FilePath -> IO ()
 makeMap tingIdBase program soundLib mapFile = do
-    printf "Building map file %s ...\n" mapFile
-    writeFile mapFile . intercalate "\n" . map (\(i,n) -> show i ++ " " ++ n) $ zip [tingIdBase..] resources
+    putStr $ printf "Building map file %s ...\n" mapFile
+    withBinaryFile mapFile WriteMode . putUtf8Str
+        $ intercalate "\n" . map (\(i,n) -> show i ++ " " ++ n) $ zip [tingIdBase..] resources
     where
         resources = map (\(n,_,_) -> n) program ++ map snd soundLib
 
-makeBook :: Int -> BookDescription -> Int -> Program Assembler () -> SoundLib -> FilePath -> IO ()
-makeBook bookId bookDescription tingIdBase program soundLib resourceDir = do
-    printf "Making book '%d' (resourceDir='%s') ...\n" bookId resourceDir
+makeBook :: Bool -> Int -> BookDescription -> Int -> Program Assembler () -> SoundLib -> FilePath -> IO ()
+makeBook naked bookId bookDescription tingIdBase program soundLib resourceDir = do
+    putStr $ printf "Making book '%d' (resourceDir='%s') ...\n" bookId resourceDir
     let bookDir = resourceDir </> printf "%05d" bookId
     createDirectoryIfMissing True bookDir
     let fileNames = map (\f -> printf "%05d_en.%s" bookId f) ["ouf", "png", "txt", "map"]
     let (oufFile:thumbFile:descFile:mapFile:[]) = map (bookDir </>) fileNames
-    link bookId tingIdBase program soundLib oufFile
+    link naked bookId tingIdBase program soundLib oufFile
     makeDescription bookDescription { _thumb = thumbFile, _file = oufFile } descFile
     makeMap tingIdBase program soundLib mapFile
 
@@ -303,7 +315,9 @@ makeBookFromTest testBattery bookDescription resourceDir = do
     case testBattery of
         TestBattery {..} -> do
             let program = map (\(n,p,_) -> (n,TopLevel,p)) _tests ++ _library
-            makeBook _bookId bookDescription _tingIdBase program _soundLib resourceDir
+            makeBook naked _bookId bookDescription _tingIdBase program _soundLib resourceDir
+    where
+        naked = False
 
 uploadBook :: Int -> FilePath -> IO ()
 uploadBook bookId resourceDir = do
@@ -314,7 +328,7 @@ uploadBook bookId resourceDir = do
         putStrLn "## No mounted TING folder found. No files have been copied!"
     else do
         let destDir = head mounts
-        printf "Copying files to %s ...\n" destDir
+        putStr $ printf "Copying files to %s ...\n" destDir
         let bookDir = resourceDir </> printf "%05d" bookId
         let fileNames = map (\f -> printf "%05d_en.%s" bookId f) ["ouf", "png", "txt", "map"]
         mapM_ (\f -> do

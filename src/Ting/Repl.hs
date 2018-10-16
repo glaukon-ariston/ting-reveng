@@ -30,6 +30,9 @@ https://kwangyulseo.com/tag/overloadedstrings/
 
 module Ting.Repl where
 
+import Prelude hiding (putStr, putStrLn)
+import IOUtil (putStr, putStrLn)
+
 import Data.List (find, groupBy, sortBy)
 import Data.Function (on)
 import Data.Word (Word16)

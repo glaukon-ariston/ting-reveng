@@ -16,7 +16,9 @@ http://wall.org/~lewis/2013/10/15/asm-monad.html
 
 module Main where
 
-import Prelude hiding (and, or, not, return)
+import Prelude hiding (and, or, not, return, getContents, putStr, putStrLn)
+import IOUtil (putStr, putStrLn)
+
 import Control.Monad.Fix (MonadFix(..))
 
 import Ting.Instructions
@@ -227,8 +229,9 @@ testIndirectJmp =
     ]
 
 saveBookTestIndirectJmp :: IO ()
-saveBookTestIndirectJmp = makeBook bookId bookDesc tingId (testIndirectJmp++prelude) preludeSoundLib "books"
+saveBookTestIndirectJmp = makeBook naked bookId bookDesc tingId (testIndirectJmp++prelude) preludeSoundLib "books"
     where
+        naked = False
         bookId = 8011
         tingId = 15001
         bookDesc = BookDescription 
@@ -242,8 +245,9 @@ saveBookTestIndirectJmp = makeBook bookId bookDesc tingId (testIndirectJmp++prel
             }
 
 saveBookTestFlags :: IO ()
-saveBookTestFlags = makeBook bookId bookDesc tingId testFlags digits "books"
+saveBookTestFlags = makeBook naked bookId bookDesc tingId testFlags digits "books"
     where
+        naked = False
         bookId = 8000
         tingId = 15001
         bookDesc = BookDescription 
@@ -257,8 +261,9 @@ saveBookTestFlags = makeBook bookId bookDesc tingId testFlags digits "books"
             }
 
 saveBookOne :: IO ()
-saveBookOne = makeBook bookId bookDesc tingId program sounds "books"
+saveBookOne = makeBook naked bookId bookDesc tingId program sounds "books"
     where
+        naked = False
         bookId = 8000
         tingId = 15001
         bookDesc = BookDescription 

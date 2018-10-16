@@ -1,0 +1,9 @@
+Name: New Building Blocks 3
+Publisher: Profil Klett
+Author: Kristina Čajo Anđel, Ankica Knezović
+Book Version: 1
+URL: https://github.com/glaukon-ariston/ting-reveng
+ThumbMD5: 7ce755daa2c7ff6c7e7b3c47167191da
+FileMD5: aeb3e41a92c95e9f1173a925c2f071d1
+ScriptMD5: 
+Book Area Code: en
