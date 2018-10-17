@@ -13,7 +13,7 @@ Abstract:
 module Main where
 
 import Prelude hiding (and, or, not, return, getContents, putStr, putStrLn)
-import IOUtil (putStr, putStrLn)
+import System.IO.Console.IOUtil (putStr, putStrLn)
 
 import Control.Monad.Fix (MonadFix(..))
 import Data.List (findIndex)

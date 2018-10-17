@@ -20,7 +20,7 @@ stack exec ting-compiler "C:\Tata\Language\German\Giorgio Motta, Mirjana Klobuč
 module Main where
 
 import Prelude hiding (Word, getContents, putStr, putStrLn) --(IO, Read, Show, String)
-import IOUtil (putStr, putStrLn)
+import System.IO.Console.IOUtil (putStr, putStrLn)
 
 import Control.Monad (filterM)
 import Control.Monad.Fix (MonadFix(..))

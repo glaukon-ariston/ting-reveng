@@ -20,7 +20,7 @@ Description:
 
 library
     hs-source-dirs: src
-    exposed-modules: IOUtil
+    exposed-modules: System.IO.Console.IOUtil
     other-modules:
     build-depends: base >= 4.7 && < 5, Win32
     default-extensions: NoMonomorphismRestriction                     

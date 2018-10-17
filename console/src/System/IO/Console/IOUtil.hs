@@ -37,13 +37,19 @@ If you need to print to stderr, you should use (e.g.) ePutStrLn, not hPutStrLn s
 
 -}
 
-module IOUtil (
-  IOUtil.interact,
-  IOUtil.putChar, IOUtil.putStr, IOUtil.putStrLn, IOUtil.print,
-  IOUtil.getChar, IOUtil.getLine, IOUtil.getContents, IOUtil.readIO,
-  IOUtil.readLn,
-  ePutChar, ePutStr, ePutStrLn, ePrint,
-  trace, traceIO
+module System.IO.Console.IOUtil 
+  ( System.IO.Console.IOUtil.interact
+  , System.IO.Console.IOUtil.putChar
+  , System.IO.Console.IOUtil.putStr
+  , System.IO.Console.IOUtil.putStrLn
+  , System.IO.Console.IOUtil.print
+  , System.IO.Console.IOUtil.getChar
+  , System.IO.Console.IOUtil.getLine
+  , System.IO.Console.IOUtil.getContents
+  , System.IO.Console.IOUtil.readIO
+  , System.IO.Console.IOUtil.readLn
+  , ePutChar, ePutStr, ePutStrLn, ePrint
+  , trace, traceIO
   ) where
 
 #ifdef mingw32_HOST_OS

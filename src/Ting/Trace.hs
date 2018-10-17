@@ -11,7 +11,7 @@ Usage:
 module Ting.Trace (withLocation, lineNumber) where
 
 import Prelude hiding (and, or, not, divMod, putStr, putStrLn)
-import IOUtil (putStr, putStrLn)
+import System.IO.Console.IOUtil (putStr, putStrLn)
 
 import Language.Haskell.TH
 
