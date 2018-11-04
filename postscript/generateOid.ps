@@ -65,6 +65,7 @@ tingOid begin
 ] def
 
 
+<< /PageSize PageSize >> setpagedevice
 /FontSize 5 def
 /LineHeight 1.5 FontSize mul def
 /Arial findfont FontSize scalefont setfont
@@ -119,7 +120,7 @@ oidPatch aload pop exch pop 2 div [/yLabelOffset ]#==
 	testTingOidGeneration
 	1200 2 /squareDot defineConstants
 	% 1200 2 /roundDot defineConstants
-	startTingId seqGen
+	startTingId {1 add} seqGen
 	% 0 midGen 
 		drawContactSheet 0 get [/lastIndex ] #= showpage
 	pop

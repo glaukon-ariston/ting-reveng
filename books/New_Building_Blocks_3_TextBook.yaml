@@ -1,0 +1,13 @@
+bookId: 8200
+tingIdBase: 15000
+mp3s: 
+    - C:\Tata\Audio\Language\English\New Building Blocks 3_Textbook
+description:
+    name: New Building Blocks 3 TextBook
+    publisher: Profil Klett
+    author: Kristina Čajo Anđel, Ankica Knezović, ilustrirao Tomislav Zlatić
+    bookVersion: 5. izdanje, 2018.
+    url: https://www.profil-klett.hr/proizvod/new-building-blocks-3
+    bookAreaCode: hr
+    thumb: books\newbuildingblocks3udzb_thumb.png
+    

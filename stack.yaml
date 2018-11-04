@@ -37,8 +37,13 @@ resolver: lts-12.13
 # non-dependency (i.e. a user package), and its test suites and benchmarks
 # will not be run. This is useful for tweaking upstream packages.
 packages:
-- '.'
-- './console'
+- ./lib/ting
+- ./lib/console
+- ./app/emulator
+- ./app/calculator
+- ./app/compiler
+- ./app/test
+
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps: []

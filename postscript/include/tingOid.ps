@@ -252,15 +252,17 @@ end} def
 } def
 
 
-/seqGen { % start -> proc
+/seqGen { % start op -> proc
 	% the following procedure follows the following protocol:
 	% 	- it leaves two values on the stack: value and iterator 
 	%	- the iterator is plugged back in the procedure by the seqNext procedure in place of the DUMMY element
 	%   - the value is what gets returned by the seqNext procedure 
 	{ DUMMY % _ -> value advance 
 		dup
-		1 add
-	} dup 0 % start proc proc 0 
+		DUMMY exec
+	} dup 0 		% start op proc proc 0 
+	5 -1 roll put 	% op proc
+	dup 2 			% op proc proc 2
 	4 -1 roll put
 } def
 
@@ -326,12 +328,13 @@ end} def
 
 
 % Input: Margins PageSize oidPatch
-/drawContactSheet {<<>>begin % {nextTingId} -> _
-	[/nextTingId ]#=
+/drawContactSheet {<<>>begin % {nextTingId} {labelProc} -> _
+	[/nextTingId /labelProc]#=
 	
 	Margins aload pop [/left /top /right /bottom ]#=
 	PageSize aload pop [/paperWidth /paperHeight ]#=
 	[PageSize [left right add top bottom add] {sub} a2forall] [/workArea ]#==
+	[workArea {pt2mm} forall] [/workAreaMM]#==
 	
 	/tingId [] def
 	left bottom 
@@ -348,9 +351,7 @@ end} def
 				drawOidImage
 			
 			% label the pattern
-			% x xLabelOffset add FontSize 3 div sub y moveto
-			x xLabelOffset add y yLabelOffset add moveto
-			[tingId toStr (|) oid toStr] sconcat show
+			x y width height tingId oid labelProc
 		} tile
 	left paperHeight top sub drawTitle
 	/nextTingId load
@@ -363,6 +364,7 @@ end} def
 	Margins aload pop [/left /top /right /bottom ]#=
 	PageSize aload pop [/paperWidth /paperHeight ]#=
 	[PageSize [left right add top bottom add] {sub} a2forall] [/workArea ]#==
+	[workArea {pt2mm} forall] [/workAreaMM]#==
 
 	tingId tingId2Oid [/oid ]#==
 	oid

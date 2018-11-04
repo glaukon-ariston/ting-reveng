@@ -1,0 +1,9 @@
+Name: New Building Blocks 3 WorkBook
+Publisher: Profil Klett
+Author: Kristina Čajo Anđel, Ankica Knezović, ilustrirao Tomislav Zlatić
+Book Version: 5. izdanje, 2018.
+URL: https://github.com/glaukon-ariston/ting-reveng
+ThumbMD5: 7c262573e121bc111c0343d4130334d3
+FileMD5: f005f1c2826576751f254ec2c8c4c6b2
+ScriptMD5: 
+Book Area Code: hr

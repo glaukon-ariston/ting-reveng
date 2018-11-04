@@ -1,6 +1,6 @@
 %!PS-Adobe-3.0
 %%Title: generateContactSheet.ps
-%%BoundingBox: 0 0 597 842
+%%BoundingBox: 0 0 595 842
 %%DocumentPaperSizes: a4
 %%DocumentMedia: a4 595 842 0 () ()
 %%Orientation: Portrait
@@ -14,7 +14,7 @@
 % http://ghostscript.com/doc/9.20/Use.htm#Parameters
 %
 % gswin32c -fgenerateContactSheet.ps @ps2pdf-oid.opt
-% gswin32c -sOutputFile#oid.pdf -c ".setpdfwrite <</NeverEmbed [ ] /AlwaysEmbed [/Courier]>> setdistillerparams /tingId 1500 def" @ps2pdf-oid.opt
+% gswin32c -sOutputFile#oid.pdf -c ".setpdfwrite <</NeverEmbed [ ] /AlwaysEmbed [/Courier]>> setdistillerparams /startTingId 1500 def" @ps2pdf-oid.opt
 
 
 
@@ -46,8 +46,8 @@ tingOid begin
 
 
 /PageSize [
-	210 mm %width
-	297 mm %height
+	595  % 210 mm %width
+	842  % 297 mm %height
 ] def
 
 /A4Margins [
@@ -64,7 +64,14 @@ tingOid begin
 	0 mm %bottom
 ] def
 
+/Labe17_8x10mmMargins [
+	5.4 mm %left
+	10 mm %top
+	0 mm %right
+	13.7 mm %bottom
+] def
 
+<< /PageSize PageSize >> setpagedevice
 /FontSize 5 def
 /LineHeight 1.5 FontSize mul def
 /Arial findfont FontSize scalefont setfont
@@ -72,12 +79,14 @@ LineHeight [/labelHeight ]#==
 
 % Collect definitions passed through the command line, e.g.
 % -c "/LabelMargins [ 10 mm 10 mm 0 mm 10 mm] def /LabelSize [35 mm 37 mm] def"
+% -c "/LabelMargins [ 4.5 mm 13.5 mm 4.5 mm 10 mm] def /LabelSize [17.8 mm 10 mm] def"
 /defaultLabelMargins [
 	0 mm %left
 	0 mm %top
 	0 mm %right
 	0 mm %bottom
 ] def
+/defaultLabelMargins Labe17_8x10mmMargins def
 /LabelMargins dup dup where 
 	{ exch get cvx def
 	} { 
@@ -86,6 +95,7 @@ LineHeight [/labelHeight ]#==
 /Margins LabelMargins def
 
 /defaultLabelSize [35 mm 37 mm] def
+/defaultLabelSize [20.3 mm 10 mm] def
 /LabelSize dup dup where 
 	{ exch get cvx def
 	} { 
@@ -95,9 +105,23 @@ LineHeight [/labelHeight ]#==
 % [35 mm 37 mm labelHeight sub] [/oidPatch ]#==
 % [35 mm 37 mm] [/oidPatch ]#==
 % [10 mm 10 mm] [/oidPatch ]#==
+% [17.8 mm 10 mm] [/oidPatch ]#==
 
 oidPatch aload pop pop 4 div [/xLabelOffset ]#==
-oidPatch aload pop exch pop 2 div [/yLabelOffset ]#==
+oidPatch aload pop exch pop 256 div [/yLabelOffset ]#==
+
+[(PageSize width ) PageSize 0 get pt2mm toStr
+	( mm height ) PageSize 1 get pt2mm toStr
+	( mm\n)] sconcat print
+[(PageSize width ) PageSize 0 get toStr
+	( pt height ) PageSize 1 get toStr
+	( pt\n)] sconcat print
+[(LabelWidth ) LabelWidth toStr ( mm LabelHeight ) LabelHeight toStr ( mm\n)] sconcat print
+[(Margins left ) LabelMargins 0 get pt2mm toStr 
+	( mm top ) LabelMargins 1 get pt2mm toStr
+	( mm right ) LabelMargins 2 get pt2mm toStr
+	( mm bottom ) LabelMargins 3 get pt2mm toStr
+	( mm\n)] sconcat print
 
 
 /DPI 1200 def
@@ -115,8 +139,16 @@ oidPatch aload pop exch pop 2 div [/yLabelOffset ]#==
 	testTingOidGeneration
 	DPI 2 /squareDot defineConstants
 	% DPI 2 /roundDot defineConstants
-	startTingId seqGen
-	% 0 midGen 
+	startTingId {1 add //startTingId sub //periodTingId mod //startTingId add} seqGen
+	% 0 midGen
+	{	[/x /y /width /height /tingId /oid] #=
+		[tingId toStr (  |  ) tingId toStr] sconcat [/s] #=
+		s textSize [/sWidth /sHeight] #=
+		width sWidth sub 2 div x add 
+		height sHeight sub y add
+			moveto
+		s show
+	}
 		drawContactSheet 0 get [/lastIndex ] #= showpage
 	pop
 	[(lastIndex ) lastIndex toStr] sconcat print

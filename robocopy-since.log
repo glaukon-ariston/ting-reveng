@@ -1,0 +1,385 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wednesday, 17 October 2018 22:22:02
+   Source : C:\app\dev\hp\projects\github\ting-reveng\
+     Dest : C:\app\dev\hp\#20181017-222201\
+
+    Files : *.*
+	    
+Exc Files : cabal.sandbox.config
+	    package.cache
+	    *.pyc
+	    *.s
+	    *.d
+	    *.ouf
+	    *.7z
+	    *.zip
+	    *.exe
+	    *.tmp
+	    
+ Exc Dirs : .cabal-sandbox
+	    .stack-work
+	    dist
+	    Application Data
+	    Microsoft
+	    MicrosoftEdge
+	    i386-windows-ghc-8.0.1
+	    #*
+	    ghc-paths*
+	    
+  Options : *.* /TEE /S /DCOPY:DA /COPY:DAT /XX /XO /MAXAGE:20181017 /R:1000000 /W:30 
+
+------------------------------------------------------------------------------
+
+	                  10	C:\app\dev\hp\projects\github\ting-reveng\
+	    New File  		     199	.gitignore  0%  100%  
+	    New File  		       0	robocopy-since.log  0%  100%  
+	  New Dir          9	C:\app\dev\hp\projects\github\ting-reveng\.git\
+	    New File  		      34	COMMIT_EDITMSG  0%  100%  
+	    New File  		   59893	index  0%  100%  
+	  New Dir          9	C:\app\dev\hp\projects\github\ting-reveng\.git\hooks\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\info\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\logs\
+	    New File  		     784	HEAD  0%  100%  
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\logs\refs\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\logs\refs\heads\
+	    New File  		     784	master  0%  100%  
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\logs\refs\remotes\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\logs\refs\remotes\origin\
+	    New File  		     316	master  0%  100%  
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\01\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\02\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\03\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\04\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\06\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\07\
+	    New File  		     629	263290bf0777d1ed4c47810c6f021468713ea1  0%  100%  
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\08\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\09\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\0a\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\0b\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\0c\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\0d\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\0e\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\0f\
+	    New File  		     613	717ea8320dc32f6ef90f297beae0039508e38d  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\10\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\11\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\12\
+	  New Dir          7	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\13\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\14\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\15\
+	    New File  		      50	0de1d03e85ca9d61d94ca2eec1ff921687672b  0%  100%  
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\16\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\17\
+	  New Dir          6	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\18\
+	    New File  		     116	3acbecf3859b7b73cc3ed13e21cf25e4f9dd36  0%  100%  
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\19\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\1a\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\1b\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\1c\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\1d\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\1e\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\1f\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\20\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\21\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\23\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\26\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\27\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\28\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\29\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\2a\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\2c\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\2d\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\2e\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\2f\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\30\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\31\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\32\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\34\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\35\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\36\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\37\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\38\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\3a\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\3b\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\3c\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\3d\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\3e\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\3f\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\40\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\41\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\42\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\43\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\44\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\45\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\46\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\47\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\48\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\49\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\4a\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\4c\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\4d\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\4e\
+	    New File  		     605	288c73f06b5377bd6ec869603d07ed8eeda4ac  0%  100%  
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\4f\
+	  New Dir          8	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\50\
+	    New File  		    4140	66d9bbea3ccd7f85b346c61a5b81fd82a31643  0%  100%  
+	    New File  		      52	f2a799c0dca4d9a9a2e3d9d0c996e69405aeb7  0%  100%  
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\51\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\52\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\53\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\54\
+	  New Dir          6	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\55\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\56\
+	  New Dir          8	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\57\
+	    New File  		    1330	b9ce30065902ccef4fa2760e9542b7b0d1666b  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\58\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\59\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\5a\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\5b\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\5c\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\5d\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\5e\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\5f\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\60\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\61\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\62\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\63\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\64\
+	    New File  		      48	babaf351c6a3ce0ed956f5db7c3fc8fd53e59a  0%  100%  
+	  New Dir          6	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\65\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\66\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\68\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\69\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\6a\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\6b\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\6c\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\6d\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\6e\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\6f\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\70\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\71\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\72\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\73\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\74\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\75\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\76\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\77\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\78\
+	    New File  		     657	e2df099b9ac5be3ac21e5f4cedf321c14862cf  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\79\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\7a\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\7b\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\7c\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\7d\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\7e\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\80\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\82\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\83\
+	    New File  		     120	1bd35b56a0aad71d696ef0508a60fab41419c0  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\84\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\86\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\87\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\88\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\89\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\8a\
+	    New File  		      54	ebafcd111df3c2cd31d884b770a327c1ea615b  0%  100%  
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\8b\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\8c\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\8d\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\8e\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\8f\
+	    New File  		     361	a60d9413284fa1f4b26f49293495f696e80eaa  0%  100%  
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\91\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\92\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\93\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\94\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\95\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\97\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\98\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\99\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\9a\
+	    New File  		    4621	807edaac369f88a686f89c209765b359053fdb  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\9b\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\9c\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\9d\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\9e\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\9f\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a0\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a1\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a2\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a3\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a4\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a6\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a7\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a8\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\a9\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\aa\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ab\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ac\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ad\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ae\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\af\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b0\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b1\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b2\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b3\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b4\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b5\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b6\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b7\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b8\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\b9\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ba\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\bb\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\bc\
+	    New File  		    2968	60fec526d7eb8851898dd1c7dcc974c2ff7bf6  0%  100%  
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\bd\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\bf\
+	    New File  		    5197	64c979decc1e32491e9c1f87f0c4885f917254  0%  100%  
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c1\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c2\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c3\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c4\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c5\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c6\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c7\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c8\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\c9\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ca\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\cb\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\cc\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\cd\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ce\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\cf\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d0\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d1\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d2\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d3\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d4\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d5\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d6\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d7\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d8\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\d9\
+	    New File  		      46	1690655f1087e4a3f7cd3c4f32d2c17b1edc98  0%  100%  
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\da\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\db\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\dc\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\dd\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\de\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\df\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e1\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e2\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e3\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e4\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e5\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e6\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e7\
+	    New File  		      52	30d70a79ed8ba9668212aae3e82e28c950b7f2  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e8\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\e9\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ea\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\eb\
+	    New File  		      52	e997bee4d312c3e6d8ad164a76822d6014fb48  0%  100%  
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ec\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ed\
+	    New File  		     191	b2a349a3269cb7d9cb7a687579a38fea3d35b1  0%  100%  
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\ee\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f0\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f1\
+	  New Dir          9	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f2\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f3\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f4\
+	    New File  		     113	9f6f43836776e26678e8d246a4942e1d434214  0%  100%  
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f5\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f6\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f7\
+	    New File  		    1892	e4c240aaa53ca97402fa372ae1c3c23a2966d6  0%  100%  
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f8\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\f9\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\fb\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\fc\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\fd\
+	    New File  		      44	2b6f0a924fa40aaf6ef89aa9f8336e8f45117d  0%  100%  
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\fe\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\info\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\objects\pack\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\refs\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\.git\refs\heads\
+	    New File  		      41	master  0%  100%  
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\refs\remotes\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\.git\refs\remotes\origin\
+	    New File  		      41	master  0%  100%  
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\.git\refs\tags\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\analysis\
+	  New Dir         22	C:\app\dev\hp\projects\github\ting-reveng\analysis\010Editor\
+	  New Dir          5	C:\app\dev\hp\projects\github\ting-reveng\analysis\extracted\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\analysis\extracted\books\
+	  New Dir         15	C:\app\dev\hp\projects\github\ting-reveng\analysis\hardware\
+	  New Dir         12	C:\app\dev\hp\projects\github\ting-reveng\analysis\hardware\Ting_v1.3\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\analysis\system.ting.eu\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\apps\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\
+	    New File  		    9257	Main.hs  0%  100%  
+	  New Dir          7	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\print\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\hr\
+	  New Dir         64	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\hr\lovre\
+	  New Dir         60	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\hr\marijana\
+	  New Dir         63	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\hr\mikula\
+	  New Dir         68	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\hr\neven\
+	  New Dir         57	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\hr\tata\
+	  New Dir         63	C:\app\dev\hp\projects\github\ting-reveng\apps\calculator\sounds\hr\vjeko\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\apps\compiler\
+	    New File  		    2667	Main.hs  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\apps\generic\
+	    New File  		    8080	Main.hs  0%  100%  
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\books\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\books\08001\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\books\08200\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\console\
+	    New File  		    1080	console.cabal  0%  100%  
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\console\src\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\console\src\System\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\console\src\System\IO\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\console\src\System\IO\Console\
+	    New File  		   14042	IOUtil.hs  0%  100%  
+	  New Dir          8	C:\app\dev\hp\projects\github\ting-reveng\postscript\
+	  New Dir          7	C:\app\dev\hp\projects\github\ting-reveng\postscript\include\
+	  New Dir          4	C:\app\dev\hp\projects\github\ting-reveng\postscript\oids\
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\postscript\Resource\
+	  New Dir          2	C:\app\dev\hp\projects\github\ting-reveng\postscript\Resource\Category\
+	  New Dir          8	C:\app\dev\hp\projects\github\ting-reveng\postscript\Resource\net.anastigmatix.filter\
+	  New Dir         15	C:\app\dev\hp\projects\github\ting-reveng\postscript\Resource\ProcSet\
+	  New Dir          3	C:\app\dev\hp\projects\github\ting-reveng\resources\
+	  New Dir         14	C:\app\dev\hp\projects\github\ting-reveng\sounds\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\sounds\hr\
+	  New Dir         17	C:\app\dev\hp\projects\github\ting-reveng\sounds\hr\boris\
+	  New Dir         11	C:\app\dev\hp\projects\github\ting-reveng\sounds\hr\vjeko\
+	  New Dir          0	C:\app\dev\hp\projects\github\ting-reveng\src\
+	  New Dir         11	C:\app\dev\hp\projects\github\ting-reveng\src\Ting\
+	    New File  		   12426	Linker.hs  0%  100%  
+	    New File  		   12268	Repl.hs  0%  100%  
+	    New File  		    1338	Trace.hs  0%  100%  
+	  New Dir          1	C:\app\dev\hp\projects\github\ting-reveng\test\
+	    New File  		    1325	Spec.hs  0%  100%  
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :       296       293         3         0         0         0
+   Files :      1214        41      1173         0         0         0
+   Bytes :  450.30 m   145.0 k  450.16 m         0         0         0
+   Times :   0:00:01   0:00:00                       0:00:00   0:00:01
+
+
+   Speed :             1350236 Bytes/sec.
+   Speed :              77.261 MegaBytes/min.
+   Ended : Wednesday, 17 October 2018 22:22:03
+

@@ -303,7 +303,7 @@ end } def
 		(CE) (1) (2) (3) (-)
 		(C)  ()  (0) (=) (+)
 	] [/keys ]#=
-	0 seqGen [/iterator ]#=
+	0 {1 add} seqGen [/iterator ]#=
 	keys columns keyboardArea [/keyboardMainWidth /keyboardMainHeight ]#=
 	left bottom 
 	keyboardMainWidth keyboardMainHeight
@@ -314,7 +314,7 @@ end } def
 	[ (LCD)	] [/keys ]#=
 	/oidPatch [keyboardMainWidth 20 mm] def
 	/lcdHeight oidPatch #y def
-	0 seqGen [/iterator ]#=
+	0 {1 add} seqGen [/iterator ]#=
 	left [bottom keyboardMainHeight keySeparation #x] sum
 	keyboardMainWidth lcdHeight
 		drawKey
@@ -324,7 +324,7 @@ end } def
 	] [/keys ]#=
 	/oidPatch [35 mm 35 mm] def
 	/columns 3 def
-	0 seqGen [/iterator ]#=
+	0 {1 add} seqGen [/iterator ]#=
 	left [bottom keyboardMainHeight keySeparation #x lcdHeight keySeparation #x] sum
 	keys columns keyboardArea [/keyboardExtraWidth /keyboardExtraHeight ]#=
 	keyboardExtraWidth keyboardExtraHeight

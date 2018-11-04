@@ -1,0 +1,9 @@
+Name: Wir+2 Udžbenik njemačkog jezika za 5. razred osnovne škole 2. godina učenja
+Publisher: Klett Verlag
+Author: Giorgio Motta, Mirjana Klobučar
+Book Version: 4. izdanje, 2017.
+URL: http://www.klett.hr/wir%2B_2__1012-51.htm
+ThumbMD5: 49fa53176c2c49aaabf7e0d163dc1b1f
+FileMD5: 85484fbcbed8038079d588ce67e6b9fa
+ScriptMD5: 
+Book Area Code: hr

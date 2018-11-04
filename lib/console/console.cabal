@@ -1,0 +1,28 @@
+Name:                console
+synopsis:            Unicode on Windows fix.
+Version:             1.0 
+License:             AllRightsReserved 
+license-file:        LICENSE
+Author:              circular-ruin
+Maintainer:          glaukon dot ariston (at) gmail dot com
+category:            Console
+stability:           Experimental
+Build-Type:          Simple 
+cabal-version:       >= 1.10
+Description:
+     It's basically a translation from Python to Haskell of this
+     python workaround for the same issue. It uses 'option B' 
+     mentioned in the question.
+     The basic idea is that you create a module IOUtil.hs, with 
+     the following content, which you can import into your code.
+     https://stackoverflow.com/questions/10779149/unicode-console-i-o-in-haskell-on-windows
+
+
+library
+    hs-source-dirs: src
+    exposed-modules: System.IO.Console.IOUtil
+    other-modules:
+    build-depends: base >= 4.7 && < 5, Win32
+    default-extensions: NoMonomorphismRestriction                     
+    default-language: Haskell2010
+    ghc-options: -Wall

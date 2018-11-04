@@ -1,0 +1,9 @@
+Name: New Building Blocks 2 WorkBook
+Publisher: Profil Klett
+Author: Kristina Čajo Anđel, Daška Domljan, Ankica Knezović, Danka Singer, ilustrirao Tomislav Zlatić
+Book Version: 5. izdanje, 2018.
+URL: https://www.profil-klett.hr/proizvod/new-building-blocks-2-0
+ThumbMD5: 53e51d13deaf1b5697700139ba53c147
+FileMD5: 0675d8ef1b4bc13a2c9c0f720eec1401
+ScriptMD5: 
+Book Area Code: hr
