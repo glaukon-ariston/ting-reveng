@@ -1,0 +1,9 @@
+Name: Glazbena petica Udžbenik glazbene kulture s tri CD-a za peti razred osnovne škole
+Publisher: Profil Klett
+Author: Saša Marić, Ljiljana Sčedrov
+Book Version: 5. izdanje, 2018.
+URL: https://www.profil-klett.hr/proizvod/glazbena-petica
+ThumbMD5: ccb4ea80d21f2fb4f7ab555407ae965a
+FileMD5: 4a981fbaa69a9348c98f440760827d2f
+ScriptMD5: 
+Book Area Code: hr

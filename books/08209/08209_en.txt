@@ -1,0 +1,9 @@
+Name: Razigrani zvuci 1 Udžbenik glazbene kulture u prvom razredu osnovne škole
+Publisher: Školska knjiga
+Author: Vladimir Jandrašek, Jelena Ivaci
+Book Version: 4. izdanje, 2017.
+URL: https://shop.skolskaknjiga.hr/razigrani-zvuci-1.html
+ThumbMD5: 4812e6c228bfb84887e4f677d58fba39
+FileMD5: 609b96de0003daced32a6332f804449b
+ScriptMD5: 
+Book Area Code: hr

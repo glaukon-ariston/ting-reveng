@@ -126,6 +126,42 @@ oidPatch aload pop exch pop 256 div [/yLabelOffset ]#==
 
 /DPI 1200 def
 
+/drawLabel1 { <<>>begin % _ <- oid tingId height width y x
+	[/x /y /width /height /tingId /oid] #=
+	[tingId toStr (  |  ) tingId toStr] sconcat [/s] #=
+	s textSize [/sWidth /sHeight] #=
+	width sWidth sub 2 div x add 	% center horizontally
+	height sHeight sub y add 		% flush with top
+		moveto
+	s show
+end } bind def
+
+
+/glazbenaPeticaCDs [26 25 21] def
+
+/drawLabel2 { <<>>begin % _ <- oid tingId height width y x
+	[/x /y /width /height /tingId /oid] #=
+	/cd 1 def
+	/track tingId //startTingId sub def
+	glazbenaPeticaCDs {
+		dup
+		track lt {
+			track exch sub [/track] #=
+			/cd cd 1 add def
+		} {
+			pop
+			exit
+		} ifelse
+	} forall
+	[(CD) cd toStr (-) track toStr] sconcat [/s] #==
+	s textSize [/sWidth /sHeight] #=
+	width sWidth sub 2 div x add 	% center horizontally
+	height sHeight sub y add 		% flush with top
+		moveto
+	s show
+end } bind def
+
+
 %%EndSetup
 
 
@@ -141,14 +177,7 @@ oidPatch aload pop exch pop 256 div [/yLabelOffset ]#==
 	% DPI 2 /roundDot defineConstants
 	startTingId {1 add //startTingId sub //periodTingId mod //startTingId add} seqGen
 	% 0 midGen
-	{	[/x /y /width /height /tingId /oid] #=
-		[tingId toStr (  |  ) tingId toStr] sconcat [/s] #=
-		s textSize [/sWidth /sHeight] #=
-		width sWidth sub 2 div x add 
-		height sHeight sub y add
-			moveto
-		s show
-	}
+	/drawLabel2 load
 		drawContactSheet 0 get [/lastIndex ] #= showpage
 	pop
 	[(lastIndex ) lastIndex toStr] sconcat print

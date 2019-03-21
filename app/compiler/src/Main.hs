@@ -16,6 +16,8 @@ stack exec ting-compiler "books\New_Building_Blocks_2_WorkBook.yaml"
 stack exec ting-compiler "books\New_Building_Blocks_3_TextBook.yaml"
 stack exec ting-compiler "books\New_Building_Blocks_3_WorkBook.yaml"
 stack exec ting-compiler "books\Wir+2_TextBook.yaml"
+stack exec ting-compiler "books\Glazbena petica_TextBook.yaml"
+stack exec ting-compiler "books\Razigrani_Zvuci_1_TextBook_Pjevajmo.yaml"
 
 ghcid --command="stack repl compiler" -o ghcid.txt
 
@@ -27,6 +29,7 @@ import Prelude hiding (Word, getContents, putStr, putStrLn) --(IO, Read, Show, S
 import System.IO.Console.IOUtil (putStr, putStrLn)
 import Formatting (fprint, (%))
 import Formatting.Formatters (int, string)
+import Text.Printf (printf)
 
 import Control.Monad (filterM)
 import Control.Monad.Fix (MonadFix(..))
@@ -88,5 +91,6 @@ sounds dirs = do
             withCurrentDirectory dir $ do
                 files <- filterM doesFileExist items
                 let mp3s = sort . filter (\f -> takeExtension f == ".mp3") $ files
-                fprint ("Collected " % int % " mp3 files from\n" % string % "\n") (length mp3s) dir
+                --fprint ("Collected " % int % " mp3 files from\n" % string % "\n") (length mp3s) dir
+                putStr $ printf "Collected %d mp3 files from\n%s\n" (length mp3s) dir
                 return $ [(takeBaseName m, dir </> m) | m <- mp3s]

@@ -1,0 +1,165 @@
+%!PS-Adobe-3.0
+%%Title: glazbenaPetica.ps
+%%BoundingBox: 0 0 595 842
+%%DocumentPaperSizes: a4
+%%DocumentMedia: a4 595 842 0 () ()
+%%Orientation: Portrait
+%%Creator: Glaukon Ariston
+%%Copyright: Glaukon Ariston. All Rights Reserved
+%%Date: 07/12/2018
+%%LanguageLevel: 3
+%%EndComments
+
+% http://ghostscript.com/doc/9.20/Use.htm#Input_control
+% http://ghostscript.com/doc/9.20/Use.htm#Parameters
+%
+% gswin32c -fglazbenaPetica.ps @ps2pdf-oid.opt
+% gswin32c -sOutputFile#oid.pdf -c ".setpdfwrite <</NeverEmbed [ ] /AlwaysEmbed [/Courier]>> setdistillerparams /startTingId 1500 def" @ps2pdf-oid.opt
+
+
+
+%%BeginProlog
+
+(include/misc.ps) run
+(include/tingOid.ps) run
+
+%%EndProlog
+
+
+
+%%BeginSetup
+
+misc begin
+tingOid begin
+
+/PageSize [
+	595  % 210 mm %width
+	842  % 297 mm %height
+] def
+
+/A4Margins [
+	1.5 inch %left
+	1.5 inch %top
+	1.5 inch %right
+	1.5 inch %bottom
+] def
+
+/Margins A4Margins def
+
+
+<< /PageSize PageSize >> setpagedevice
+/FontSize 10 def
+/LineHeight 1.5 FontSize mul def
+%/Arial findfont FontSize scalefont setfont
+/BaseFont /Calibri findfont def
+% basefont FontSize scalefont setfont
+%condensed:
+BaseFont [FontSize 0.6 mul 0 0 FontSize 0 0] makefont setfont
+
+
+[(PageSize width ) PageSize 0 get pt2mm toStr
+	( mm height ) PageSize 1 get pt2mm toStr
+	( mm\n)] sconcat print
+[(PageSize width ) PageSize 0 get toStr
+	( pt height ) PageSize 1 get toStr
+	( pt\n)] sconcat print
+
+
+/DPI 1200 def
+
+%%EndSetup
+
+
+
+%%BeginScript
+
+/glazbenaPeticaCDs [26 25 21] def
+
+/glazbenaPetica {<<>>begin % _ <- _
+	(include/map_tingId_oid.ps) run
+
+	testTingOidGeneration
+	DPI 2 /squareDot defineConstants
+	
+	Margins aload pop [/left /top /right /bottom ]#=
+	PageSize aload pop [/paperWidth /paperHeight ]#=
+	[PageSize [left right add top bottom add] {sub} a2forall] [/workArea ]#=
+
+	/labelWidth 25 mm def 
+	/labelHeight 
+		glazbenaPeticaCDs minMax exch pop
+		workArea #y
+		exch div
+	def
+
+	/oidWidth labelWidth 10 mm sub def
+	/oidHeight labelHeight 1 mm sub def
+
+	/bookId 8207 def
+	/tingId 15001 def
+	/cdNames [(I) (II) (III)] def
+	/cd 0 def
+	/x left def
+	glazbenaPeticaCDs {
+		[/trackCount] #=
+		/y bottom workArea #y add labelHeight sub def
+
+		1 1 trackCount {
+			[/track] #=
+
+			tingId tingId2Oid [/oid ]#=
+			oid 
+				x labelWidth oidWidth sub add 
+				y 
+				oidWidth oidHeight drawOidImage
+
+			x y moveto
+			[(CD ) cdNames cd get (/) track toStr] sconcat show
+
+			/y y labelHeight sub def
+			/tingId tingId 1 add def
+		} for
+		/cd cd 1 add def
+		/x x labelWidth 1.5 mul add def
+	} forall
+
+	%% Show the title
+	/TitleFontSize 14 def
+	/Calibri findfont TitleFontSize scalefont setfont
+
+	/titleSize 40 mm def
+	/x left workArea #x add titleSize sub def
+	/y bottom def
+	x y moveto
+	(Glazbena PETICA) [/s] #=
+	s show
+	
+	%% Show the book ID
+	bookId tingId2Oid [/oid ]#=
+	s textSize [/sWidth /sHeight] #=
+	/y y sHeight 1.5 mul add def
+	/r sWidth 2 div def
+	gsave
+	newpath
+	x r add y r add r 0 360 arc
+	clip
+	oid x y sWidth sWidth drawOidImage
+	grestore
+	
+
+	showpage
+end } def
+
+
+% main 
+{
+	glazbenaPetica
+} exec
+
+
+end % tingOid
+end % misc
+%%EndScript
+
+%%Trailer
+%%EOF
