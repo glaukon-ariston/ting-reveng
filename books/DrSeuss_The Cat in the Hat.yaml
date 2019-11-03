@@ -1,0 +1,13 @@
+bookId: 8215
+tingIdBase: 15000
+mp3s: 
+    - E:\DrSeuss\Dr. Seuss Beginner Book Video - The Cat In The Hat and Maybe you Should Be a Vet!
+description:
+    name: The Cat in the Hat
+    publisher: Random House, Houghton Mifflin
+    author: Dr. Seuss
+    bookVersion: March 12, 1957
+    url: https://en.wikipedia.org/wiki/The_Cat_in_the_Hat
+    bookAreaCode: en
+    thumb: books\DrSeuss_The Cat in the Hat.png
+    

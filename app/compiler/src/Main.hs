@@ -18,6 +18,9 @@ stack exec ting-compiler "books\New_Building_Blocks_3_WorkBook.yaml"
 stack exec ting-compiler "books\Wir+2_TextBook.yaml"
 stack exec ting-compiler "books\Glazbena petica_TextBook.yaml"
 stack exec ting-compiler "books\Razigrani_Zvuci_1_TextBook_Pjevajmo.yaml"
+stack exec ting-compiler "books\Dr.Seuss_ABC.yaml"
+stack exec ting-compiler "books\Bullhit.yaml"
+stack exec ting-compiler "books\Frederick Noad_Solo Guitar Playing 1.yaml"
 
 ghcid --command="stack repl compiler" -o ghcid.txt
 

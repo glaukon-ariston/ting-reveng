@@ -1,0 +1,13 @@
+bookId: 8214
+tingIdBase: 15000
+mp3s: 
+    - E:\DrSeuss\Dr Seuss_ABC_Narrated by Rik Mayall
+description:
+    name: ABC
+    publisher: Random House, The Living Books Company (1995)
+    author: Dr. Seuss
+    bookVersion: 1963 (renewed 1991)
+    url: https://en.wikipedia.org/wiki/Dr._Seuss%27s_ABC
+    bookAreaCode: en
+    thumb: books\DrSeusssABC.png
+    

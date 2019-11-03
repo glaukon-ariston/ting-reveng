@@ -125,6 +125,7 @@ oidPatch aload pop exch pop 256 div [/yLabelOffset ]#==
 
 
 /DPI 1200 def
+%/DPI 3600 def
 
 /drawLabel1 { <<>>begin % _ <- oid tingId height width y x
 	[/x /y /width /height /tingId /oid] #=
@@ -173,11 +174,11 @@ end } bind def
 	(include/map_tingId_oid.ps) run
 
 	testTingOidGeneration
-	DPI 2 /squareDot defineConstants
+	DPI 1.8 /squareDot defineConstants
 	% DPI 2 /roundDot defineConstants
 	startTingId {1 add //startTingId sub //periodTingId mod //startTingId add} seqGen
 	% 0 midGen
-	/drawLabel2 load
+	/drawLabel1 load
 		drawContactSheet 0 get [/lastIndex ] #= showpage
 	pop
 	[(lastIndex ) lastIndex toStr] sconcat print

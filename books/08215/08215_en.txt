@@ -1,0 +1,9 @@
+Name: The Cat in the Hat
+Publisher: Random House, Houghton Mifflin
+Author: Dr. Seuss
+Book Version: March 12, 1957
+URL: https://en.wikipedia.org/wiki/The_Cat_in_the_Hat
+ThumbMD5: 4829c0b06be4ced5f0d7fdf325d9ddc6
+FileMD5: d6e6afc2bf20f5a163aa5347a15b29da
+ScriptMD5: 
+Book Area Code: en

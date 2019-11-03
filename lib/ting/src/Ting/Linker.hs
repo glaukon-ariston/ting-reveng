@@ -42,7 +42,7 @@ where
 import Prelude hiding (and, or, not, divMod, putStr, putStrLn)
 import System.IO.Console.IOUtil (putStr, putStrLn)
 
-import System.IO (Handle, IOMode(WriteMode), withBinaryFile)
+import System.IO (Handle, IOMode(WriteMode, ReadMode), withBinaryFile, hFileSize)
 
 import Data.List (intercalate)
 
@@ -67,6 +67,22 @@ import Ting.OUFWriter (createOUF)
 import Ting.BookConfig (BookDescription(..))
 
 
+fileSize :: FilePath -> IO Integer
+fileSize path = withBinaryFile path ReadMode hFileSize
+
+
+roundUp :: Integer -> Integer -> Integer
+roundUp n k = (n+k-1) `div` k
+
+
+mB :: Integer -> Integer
+mB n = roundUp n (1024*1024)
+
+
+kB :: Integer -> Integer
+kB n = roundUp n 1024
+
+
 link :: Bool -> Int -> Int -> Program Assembler () -> SoundLib -> FilePath -> IO ()
 link naked bookID tingIdBase program soundLib filepath = do
     putStr $ printf "Linking %s (bookID %d, tingIdBase %d) ...\n" filepath bookID tingIdBase
@@ -76,6 +92,8 @@ link naked bookID tingIdBase program soundLib filepath = do
     sounds <- mapM loadSound soundLib
     putStr $ printf "\tSounds #%d\n" $ length sounds 
     createOUF filepath bookID tingIdBase procedures sounds timestamp
+    n <- fileSize filepath
+    putStr $ printf "Created %s: %d kB [%d MB]\n" filepath (kB n) (mB n)
     where
         loadSound (_,s) = B.readFile s
 

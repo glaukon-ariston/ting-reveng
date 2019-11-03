@@ -1,0 +1,9 @@
+Name: ABC
+Publisher: Random House, The Living Books Company (1995)
+Author: Dr. Seuss
+Book Version: 1963 (renewed 1991)
+URL: https://en.wikipedia.org/wiki/Dr._Seuss%27s_ABC
+ThumbMD5: 94c6b5e8a4de90f2d0337ef5a086bc17
+FileMD5: 0dbd3a6862f4ef57a88bdf84cafa8dad
+ScriptMD5: 
+Book Area Code: en

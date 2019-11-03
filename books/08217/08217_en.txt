@@ -1,0 +1,9 @@
+Name: Solo Guitar Playing 1 3rd Edition
+Publisher: Schirmer Books
+Author: Frederick Noad
+Book Version: Year 1994.
+URL: https://www.amazon.com/Solo-Guitar-Playing-Third-Book/dp/0825694000
+ThumbMD5: 2561ca09b6a5e8b26268ad7f67b78599
+FileMD5: b92879d335701bde53ad595011aa360b
+ScriptMD5: 
+Book Area Code: en

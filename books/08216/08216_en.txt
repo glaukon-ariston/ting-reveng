@@ -1,0 +1,9 @@
+Name: Luka Bulić - Bullhit Antene Zagreb
+Publisher: Antena Zagreb
+Author: Luka Bulić
+Book Version: 30 listopada 2019
+URL: https://www.youtube.com/user/jesenjasonata
+ThumbMD5: 4829c0b06be4ced5f0d7fdf325d9ddc6
+FileMD5: 081cb25666448811e148a7bc5200d4b2
+ScriptMD5: 
+Book Area Code: en
